@@ -3,17 +3,16 @@
 namespace App\Queries;
 
 use App\Service;
-use Illuminate\Http\Request;
 
 class ChildrenPerService extends QueryObject
 {
     /**
      * Execute the query:
-     *  1) Quanti bambini per servizi
+     *  2) CCnteggio di bambini per servizio
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         return Service::withCount('children')
             // ->get();

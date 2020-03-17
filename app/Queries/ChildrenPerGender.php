@@ -15,7 +15,8 @@ class ChildrenPerGender extends QueryObject
     public function __invoke()
     {
         return Child::groupBy('gender')
-            ->selectRaw('gender, count(*) as children_count')
-            ->get();
+            ->selectRaw('gender, count(*) as bambini')
+            ->get()
+            ->pluck('bambini', 'gender');
     }
 }

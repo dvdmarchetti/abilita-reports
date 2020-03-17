@@ -8,7 +8,7 @@ class ChildrenPerMaxDiagnosis extends QueryObject
 {
     /**
      * Execute the query:
-     *  13) Quanti servizi frequenta ciascun bambino
+     *  8) Quanti bambini con più diagnosi?
      *
      * @return \Illuminate\Support\Collection
      */

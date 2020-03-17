@@ -16,8 +16,8 @@ class ChildrenPerDiagnosisArea extends QueryObject
     {
         return ChildService::query()
             ->selectRaw('diagnosis_area, count(*) as bambini')
-            ->whereNotNull('diagnosis_area')
-            ->where('diagnosis_area', '<>', '')
+            // ->whereNotNull('diagnosis_area')
+            // ->where('diagnosis_area', '<>', '')
             ->groupBy('diagnosis_area')
             ->get()
             ->pluck('bambini', 'diagnosis_area');

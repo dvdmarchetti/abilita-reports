@@ -13,6 +13,7 @@ class ChildService extends Pivot
      */
     protected $dates = [
         'first_appearance',
+        'end_of_charge',
         'from',
         'to',
     ];

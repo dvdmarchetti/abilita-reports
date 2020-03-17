@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Relations\ChildService;
 use Illuminate\Database\Eloquent\Model;
 
 class Child extends Model
@@ -36,6 +37,18 @@ class Child extends Model
 
     public function services()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class)
+            ->using(ChildService::class)
+            ->withPivot([
+                'diagnosis_area',
+                'diagnosis_count',
+                'first_appearance',
+                'end_of_charge',
+                'end_reason',
+                'from',
+                'to',
+                'attendance_months',
+                'source'
+            ]);
     }
 }

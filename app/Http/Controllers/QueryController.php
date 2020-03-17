@@ -2,7 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Queries\ChildrenPerAgeRange;
+use App\Queries\ChildrenPerDiagnosisArea;
+use App\Queries\ChildrenPerEndReason;
+use App\Queries\ChildrenPerGender;
+use App\Queries\ChildrenPerHomeCity;
+use App\Queries\ChildrenPerMaxDiagnosis;
+use App\Queries\ChildrenPerNationality;
 use App\Queries\ChildrenPerService;
+use App\Queries\ChildrenPerServiceByMonths;
+use App\Queries\ChildrenPerSourceChannel;
+use App\Queries\ChildrenPerYears;
 use App\Queries\ChildrenTotal;
 use Illuminate\Support\Str;
 
@@ -16,6 +26,16 @@ class QueryController extends Controller
     protected $queries = [
         ChildrenTotal::class,
         ChildrenPerService::class,
+        ChildrenPerGender::class,
+        ChildrenPerAgeRange::class,
+        ChildrenPerNationality::class,
+        ChildrenPerHomeCity::class,
+        ChildrenPerDiagnosisArea::class,
+        ChildrenPerMaxDiagnosis::class,
+        ChildrenPerYears::class,
+        ChildrenPerServiceByMonths::class,
+        ChildrenPerEndReason::class,
+        ChildrenPerSourceChannel::class,
     ];
 
     public function __construct()
@@ -32,7 +52,9 @@ class QueryController extends Controller
      */
     public function index()
     {
-        return $this->queries->keys();
+        return $this->queries->map(function ($class) {
+            return (new $class)();
+        });
     }
 
     /**
@@ -47,7 +69,7 @@ class QueryController extends Controller
             return abort(404);
         });
 
-        return (new $class)(request());
+        return (new $class)();
     }
 
     /**

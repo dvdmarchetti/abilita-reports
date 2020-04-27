@@ -37,18 +37,22 @@ class ChildrenImport extends CommonImport
     public function rules(): array
     {
         return [
-            'id_bambino' => 'required',
-            'sesso' => 'in:M,F',
-            'data_di_nascita' => 'required|date',
+            'id_bambino' => ['required'],
+            'sesso' => ['in:M,F'],
+            'data_di_nascita' => ['required', 'date'],
 
-            'luogo_di_nascita_citta' => 'nullable|string',
-            'luogo_di_nascita_nazione' => 'nullable|string',
-            'nazionalita' => 'string',
+            'luogo_di_nascita_citta' => ['nullable', 'string'],
+            'luogo_di_nascita_nazione' => ['nullable', 'string'],
+            'nazionalita' => ['string'],
 
-            'residenza_citta' => 'bail|same_insensitive:area_metropolitana|same:area_metropolitana',
-            'residenza_prov' => 'string|size:2',
-            'residenza_cap' => 'integer|min:10000|max:99999',
-            'municipio_milano' => 'nullable|integer',
+            'residenza_citta' => ['bail', 'same_insensitive:area_metropolitana'],
+            'residenza_prov' => ['string', 'size:2'],
+            'residenza_cap' => ['integer', 'min:10000', 'max:99999'],
+            'municipio_milano' => ['nullable', function ($attribute, $value, $fail) {
+                if ($value !== 'NO' && (!is_numeric($value) || ((int) $value) >= 10 || ((int) $value < 0))) {
+                    $fail("The {$attribute} field must either be an integer number or 'NO' value.");
+                }
+            }],
         ];
     }
 
@@ -64,7 +68,7 @@ class ChildrenImport extends CommonImport
             'id' => $row['rif_id_famiglia'],
         ]);
 
-        $child = Child::firstOrNew([
+        $child = Child::firstOrCreate([
             'id' => $row['id_bambino'],
         ], [
             'gender' => $row['sesso'],
@@ -82,18 +86,32 @@ class ChildrenImport extends CommonImport
             'home_metropolitan_area' => $row['area_metropolitana'],
         ]);
 
-        if (! $child->exists) {
-            $child->save();
-        }
-
         if ($child->gender != $row['sesso'] || $child->birth_date != $row['data_di_nascita'] || $child->family_id != $family->id) {
             $this->fail([
                 'level' => LogLevel::ALERT,
                 'spreadsheet' => $this->name,
-                'child' => $child['id_bambino'],
+                'child' => $row['id_bambino'],
                 'errors' => [
-                    'existing' => $child,
-                    'new' => $row,
+                    [
+                        'message' => 'The provided id matches an existing child with different details.',
+                        'existing' => $child,
+                        'new' => Child::make([
+                            'id' => $row['id_bambino'],
+                            'gender' => $row['sesso'],
+                            'birth_date' => $row['data_di_nascita'],
+                            'family_id' => $family->id,
+
+                            'born_city' => $row['luogo_di_nascita_citta'],
+                            'born_state' => $row['luogo_di_nascita_nazione'],
+                            'nationality' => mb_convert_encoding($row['nazionalita'], 'utf-8'),
+
+                            'home_city' => $row['residenza_citta'],
+                            'home_district' => $row['residenza_prov'],
+                            'home_cap' => $row['residenza_cap'],
+                            'home_municipality' => $row['municipio_milano'],
+                            'home_metropolitan_area' => $row['area_metropolitana'],
+                        ])
+                    ],
                 ],
             ], LogLevel::ALERT, 'Possible duplicate ID!');
         }

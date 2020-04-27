@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\BilancioSocialeImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -17,14 +18,18 @@ class ImportController extends Controller
      */
     public function index()
     {
+        Artisan::call('migrate:fresh');
+
         $files = Storage::files('input');
 
         foreach ($files as $path) {
-            $service = Str::of($path)->after('SCHEDA UNICA GESTIONE UTENTI-')->before('_rev');
+            $service = Str::of($path)->match('/SCHEDA UNICA (?:GESTIONE UTENTI-|GU_)(.+)_rev/');
             Log::channel('import')->info('Processing service input file.', ['filename' => $path]);
 
             (new BilancioSocialeImport)->for($service)->import($path);
         }
+
+        return redirect()->route('dashboard');
     }
 
     /**

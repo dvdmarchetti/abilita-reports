@@ -17,7 +17,7 @@ class CreateChildrenTable extends Migration
             $table->string('id')->primary();
 
             $table->enum('gender', ['M', 'F']);
-            $table->timestamp('birth_date');
+            $table->datetime('birth_date');
 
             $table->string('born_city')->nullable();
             $table->string('born_state')->nullable();

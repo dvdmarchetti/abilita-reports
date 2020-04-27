@@ -12,12 +12,25 @@ class ChildrenPerMaxDiagnosis extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         return ChildService::query()
-            ->selectRaw('diagnosis_count, count(distinct child_id) as bambini')
-            ->groupBy('diagnosis_count')
+            ->selectRaw('count(distinct child_id) as bambini, max(diagnosis_count) as diagnosis')
+            ->groupBy('child_id')
             ->get()
-            ->pluck('bambini', 'diagnosis_count');
+            ->countBy(function ($row) {
+                return $row->diagnosis;
+            })
+            ->sortKeys();
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '8) Quanti bambini con più diagnosi?';
     }
 }

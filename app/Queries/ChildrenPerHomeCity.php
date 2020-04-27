@@ -12,7 +12,7 @@ class ChildrenPerHomeCity extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         $milanesi = Child::where('home_city', 'MILANO')->count();
         $esterni = Child::where('home_city', '<>', 'MILANO')->count();
@@ -21,5 +21,15 @@ class ChildrenPerHomeCity extends QueryObject
             'MILANO' => $milanesi,
             'ALTRO' => $esterni,
         ]);
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '6) Quanti residenti a Milano? Quanti fuori Milano?';
     }
 }

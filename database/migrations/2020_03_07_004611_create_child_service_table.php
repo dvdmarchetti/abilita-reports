@@ -19,12 +19,12 @@ class CreateChildServiceTable extends Migration
             $table->string('diagnosis_area');
             $table->integer('diagnosis_count');
 
-            $table->timestamp('first_appearance');
-            $table->timestamp('end_of_charge')->nullable();
+            $table->datetime('first_appearance');
+            $table->datetime('end_of_charge')->nullable();
             $table->string('end_reason')->nullable();
 
-            $table->timestamp('from');
-            $table->timestamp('to')->nullable();
+            $table->datetime('from');
+            $table->datetime('to')->nullable();
             $table->integer('attendance_months');
 
             $table->string('source');

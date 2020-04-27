@@ -12,8 +12,18 @@ class ChildrenTotal extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         return Child::count();
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '1) Totale dei bambini iscritti nel 2019';
     }
 }

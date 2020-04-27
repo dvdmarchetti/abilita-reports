@@ -2,6 +2,7 @@
 
 namespace App\Queries;
 
+use App\Child;
 use App\Relations\ChildService;
 
 class ChildrenPerDiagnosisArea extends QueryObject
@@ -12,7 +13,7 @@ class ChildrenPerDiagnosisArea extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         return ChildService::query()
             ->selectRaw('diagnosis_area, count(*) as bambini')
@@ -21,5 +22,15 @@ class ChildrenPerDiagnosisArea extends QueryObject
             ->groupBy('diagnosis_area')
             ->get()
             ->pluck('bambini', 'diagnosis_area');
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '7) Quanti bambini per (area di) diagnosi';
     }
 }

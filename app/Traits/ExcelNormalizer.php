@@ -51,7 +51,7 @@ trait ExcelNormalizer
     protected function mapYears($row)
     {
         foreach ($this->years as $year) {
-            if (! empty($row[$year])) {
+            if (! empty($row[$year])|| empty($row['id_bambino'])) {
                 $row[$year] = Carbon::createMidnightDate($row[$year], 1, 1);
             } else {
                 $row[$year] = null;

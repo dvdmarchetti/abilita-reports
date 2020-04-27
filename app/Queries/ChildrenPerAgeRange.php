@@ -12,12 +12,22 @@ class ChildrenPerAgeRange extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         return Child::query()
             ->selectRaw('TIMESTAMPDIFF(YEAR, CONCAT(birth_date, DATE_FORMAT(CURDATE(), \'-%m-%d\')), CURDATE()) AS age, COUNT(*) as bambini')
             ->groupBy('age')
             ->get()
             ->pluck('bambini', 'age');
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '4) Quanti bambini di che età? Da 0 mesi ai 12 anni';
     }
 }

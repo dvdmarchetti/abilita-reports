@@ -63,7 +63,7 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
     public function collection(Collection $rows)
     {
         return $rows->reject(function ($row) {
-            return empty(array_filter($row->toArray()));
+            return $row->except($this->years + $this->dates)->filter()->count() === 0;
         })->reject(function ($row) {
             return strpos($row['id_bambino'], 'BN') === 0;
         })->filter(function ($row) {

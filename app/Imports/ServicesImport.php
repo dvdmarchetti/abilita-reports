@@ -3,6 +3,8 @@
 namespace App\Imports;
 
 use App\Child;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ServicesImport extends CommonImport
 {
@@ -63,9 +65,24 @@ class ServicesImport extends CommonImport
 
             'data_inizio_frequenza' => 'required|date|before:today',
             'data_fine_frequenza' => 'nullable|date|before:today',
-            'mesi_frequenza_servizio_anno_solare' => 'required|integer|min:1|max:12',
+            'mesi_frequenza_servizio_anno_solare' => 'required|integer|min:0|max:12',
             'fonte_invio' => 'required|string|in:ATS,SERVIZI SOCIALI,SPONTANEA,UONPIA,CASE MANAGER,SCUOLA,SERVIZIO INTERNO ABILITÀ,ALTRO',
         ];
+    }
+
+    /**
+     * Process excel rows.
+     *
+     * @param Collection $rows
+     * @return void
+     */
+    public function collection(Collection $rows)
+    {
+        return parent::collection(
+            $rows->reject(function ($row) {
+                return Str::contains($row['note_diagnosi'], 'NOTA::: figlio');
+            })
+        );
     }
 
     /**

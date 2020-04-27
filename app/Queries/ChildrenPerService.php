@@ -12,9 +12,19 @@ class ChildrenPerService extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         return Service::withCount('children')
             ->pluck('children_count', 'id');
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '2) Conteggio di bambini per servizio';
     }
 }

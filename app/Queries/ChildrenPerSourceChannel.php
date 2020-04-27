@@ -12,12 +12,22 @@ class ChildrenPerSourceChannel extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         return ChildService::query()
             ->selectRaw('source, count(*) as bambini')
             ->groupBy('source')
             ->get()
             ->pluck('bambini', 'source');
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '12) Quanti bambini per ogni fonte di invio';
     }
 }

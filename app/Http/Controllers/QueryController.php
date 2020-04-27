@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Child;
+use App\Family;
+use App\LogMessage;
 use App\Queries\ChildrenPerAgeRange;
 use App\Queries\ChildrenPerDiagnosisArea;
 use App\Queries\ChildrenPerEndReason;
@@ -14,6 +17,7 @@ use App\Queries\ChildrenPerServiceByMonths;
 use App\Queries\ChildrenPerSourceChannel;
 use App\Queries\ChildrenPerYears;
 use App\Queries\ChildrenTotal;
+use App\Service;
 use Illuminate\Support\Str;
 
 class QueryController extends Controller
@@ -52,9 +56,15 @@ class QueryController extends Controller
      */
     public function index()
     {
-        return $this->queries->map(function ($class) {
-            return (new $class)();
+        $childrenCount = Child::count();
+        $familiesCount = Family::count();
+        $servicesCount = Service::count();
+
+        $queries = $this->queries->map(function ($class) {
+            return (new $class);
         });
+
+        return view('queries', compact('queries', 'childrenCount', 'familiesCount', 'servicesCount'));
     }
 
     /**

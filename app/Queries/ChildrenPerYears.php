@@ -13,18 +13,22 @@ class ChildrenPerYears extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
-        return Child::with('services')
-            ->whereHas('services')
+        return Child::with(['services' => function ($query) {
+                // return $query->whereYear('first_appearance', '<=', config('bs.year'));
+            }])
+            ->whereHas('services', function ($query) {
+                return $query->whereYear('first_appearance', '<=', config('bs.year'));
+            })
             ->get()
             ->flatMap(function ($child) {
                 return [
                     $child->id => $this->diffInYears($child->services->first()->pivot),
                 ];
             })
-            ->groupBy(fn($child) => $child)
-            ->map->count();
+            ->countBy()
+            ->sortKeys();
     }
 
     protected function diffInYears($pivot)
@@ -32,5 +36,15 @@ class ChildrenPerYears extends QueryObject
         $from = $pivot->end_of_charge ?? Carbon::createMidnightDate(config('bs.year'), 1, 1);
 
         return $from->addYear()->diffInYears($pivot->first_appearance);
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '9) Quanti bambini per quanti anni sono in carico a L’abilità?';
     }
 }

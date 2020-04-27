@@ -12,7 +12,7 @@ class ChildrenPerNationality extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         $italiani = Child::where('nationality', 'ITALIA')->count();
         $stranieri = Child::where('nationality', '<>', 'ITALIA')->count();
@@ -21,5 +21,15 @@ class ChildrenPerNationality extends QueryObject
             'ITALIA' => $italiani,
             'ALTRO' => $stranieri,
         ]);
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '5) Quanti per nazionalità? Italiana o Straniera';
     }
 }

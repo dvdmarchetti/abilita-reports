@@ -12,11 +12,21 @@ class ChildrenPerGender extends QueryObject
      *
      * @return \Illuminate\Support\Collection
      */
-    public function __invoke()
+    public function results()
     {
         return Child::groupBy('gender')
             ->selectRaw('gender, count(*) as bambini')
             ->get()
             ->pluck('bambini', 'gender');
+    }
+
+    /**
+     * Return the query in text form.
+     *
+     * @return string
+     */
+    static public function question()
+    {
+        return '3) Quanti maschi/quante femmine';
     }
 }

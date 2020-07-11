@@ -2,7 +2,6 @@
 
 namespace App\Queries;
 
-use App\Child;
 use App\Relations\ChildService;
 
 class ChildrenPerDiagnosisArea extends QueryObject
@@ -17,8 +16,6 @@ class ChildrenPerDiagnosisArea extends QueryObject
     {
         return ChildService::query()
             ->selectRaw('diagnosis_area, count(*) as bambini')
-            // ->whereNotNull('diagnosis_area')
-            // ->where('diagnosis_area', '<>', '')
             ->groupBy('diagnosis_area')
             ->get()
             ->pluck('bambini', 'diagnosis_area');

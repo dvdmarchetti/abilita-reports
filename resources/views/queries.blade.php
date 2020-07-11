@@ -27,7 +27,25 @@
   </div>
 
   <x-card title="Children" :value="$childrenCount" icon="child" color="bg-teal-500" />
-  <x-card title="Families" :value="$familiesCount" icon="users" color="bg-blue-500" />
+
+  <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+    <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-md">
+      <div class="flex-auto p-4">
+        <div class="flex flex-wrap">
+          <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+            <h5 class="text-gray-500 uppercase font-bold text-xs">Families</h5>
+            <span class="font-semibold text-2xl text-gray-800">{{ $familiesCount }} <span class="text-base text-gray-600">({{ $familiesWithMoreThanAChildCount }} con più di un figlio)</span></span>
+          </div>
+          <div class="relative w-auto pl-4 flex-initial">
+            <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500">
+              <i class="fa fa-{}"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <x-card title="Services" :value="$servicesCount" icon="cogs" color="bg-purple-500" />
 </div>
 @endsection
@@ -90,16 +108,4 @@
     </div>
   </div>
 </div>
-
-<footer class="block py-4">
-  <div class="container mx-auto px-4">
-    <hr class="mb-4 border-b-1 border-gray-300" />
-    <div class="flex flex-wrap items-center md:justify-between justify-center">
-      <div class="w-full md:w-4/12 px-4">
-        <div class="text-sm text-gray-600 font-semibold py-1">
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
 @endsection

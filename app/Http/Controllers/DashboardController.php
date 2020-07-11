@@ -20,6 +20,12 @@ class DashboardController extends Controller
             ->allowedFilters(['service', 'spreadsheet', 'child'])
             ->get();
 
-        return view('dashboard', compact('childrenCount', 'familiesCount', 'services', 'logs', 'logsCount'));
+        return view('dashboard', compact(
+            'childrenCount',
+            'familiesCount',
+            'services',
+            'logs',
+            'logsCount',
+        ));
     }
 }

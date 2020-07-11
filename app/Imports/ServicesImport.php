@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Child;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -80,9 +81,18 @@ class ServicesImport extends CommonImport
     {
         return parent::collection(
             $rows->reject(function ($row) {
+                return $this->isInvalidYearForImport($row['data_presa_in_carico_servizio_anno']);
+            })->reject(function ($row) {
                 return Str::contains($row['note_diagnosi'], 'NOTA::: figlio');
             })
         );
+    }
+
+    protected function isInvalidYearForImport($data)
+    {
+        return ! empty($data)
+            && $data->notEqualTo(Carbon::createMidnightDate(9999, 1, 1))
+            && $data->greaterThanOrEqualTo(Carbon::createMidnightDate(config('bs.year') + 1, 1, 1));
     }
 
     /**

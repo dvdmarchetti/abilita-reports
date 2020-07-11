@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\PastYearScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model

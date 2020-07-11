@@ -58,13 +58,20 @@ class QueryController extends Controller
     {
         $childrenCount = Child::count();
         $familiesCount = Family::count();
+        $familiesWithMoreThanAChildCount = Family::has('children', '>', 1)->count();
         $servicesCount = Service::count();
 
         $queries = $this->queries->map(function ($class) {
             return (new $class);
         });
 
-        return view('queries', compact('queries', 'childrenCount', 'familiesCount', 'servicesCount'));
+        return view('queries', compact(
+            'queries',
+            'childrenCount',
+            'familiesCount',
+            'familiesWithMoreThanAChildCount',
+            'servicesCount',
+        ));
     }
 
     /**

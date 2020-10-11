@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', 'dashboard');
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::resource('imports', ImportController::class)->only('index', 'create', 'store');
 Route::resource('queries', QueryController::class)->only('index', 'show');

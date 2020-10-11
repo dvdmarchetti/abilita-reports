@@ -17,7 +17,10 @@ use App\Queries\ChildrenPerServiceByMonths;
 use App\Queries\ChildrenPerSourceChannel;
 use App\Queries\ChildrenPerYears;
 use App\Queries\ChildrenTotal;
+use App\Queries\ChildrenWithMoreThanOneService;
+use App\Queries\ServiceCountPerChildren;
 use App\Service;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class QueryController extends Controller
@@ -27,7 +30,7 @@ class QueryController extends Controller
      *
      * @var array
      */
-    protected $queries = [
+    protected $queryList = [
         ChildrenTotal::class,
         ChildrenPerService::class,
         ChildrenPerGender::class,
@@ -40,11 +43,13 @@ class QueryController extends Controller
         ChildrenPerServiceByMonths::class,
         ChildrenPerEndReason::class,
         ChildrenPerSourceChannel::class,
+        ChildrenWithMoreThanOneService::class,
+        ServiceCountPerChildren::class,
     ];
 
     public function __construct()
     {
-        $this->queries = collect($this->queries)->keyBy(function ($class) {
+        $this->queries = collect($this->queryList)->keyBy(function ($class) {
             return (string) $this->slugify($class);
         });
     }

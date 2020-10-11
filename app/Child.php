@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Relations\ChildService;
-use App\Scopes\PastYearScope;
+use App\Scopes\SQLiteCollateNocaseScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Child extends Model

@@ -30,6 +30,6 @@ class ChildrenPerEndReason extends QueryObject
      */
     static public function question()
     {
-        return '11) Quanti bambini per ogni motivo del temine della presa in carico';
+        return '11) Quanti bambini per ogni motivo del temine della presa in carico?';
     }
 }

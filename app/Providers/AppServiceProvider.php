@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -44,5 +46,14 @@ class AppServiceProvider extends ServiceProvider
             // dd($message, $attribute, $rule, $parameters);
             return str_replace(':other', $parameters[0], $message);
         });
+
+        $this->ensureDatabaseIsMigrated();
+    }
+
+    public function ensureDatabaseIsMigrated()
+    {
+        if (! (Schema::hasTable('children') && Schema::hasTable('child_service') && Schema::hasTable('services') && Schema::hasTable('families') && Schema::hasTable('log_messages'))) {
+            Artisan::run('migrate:fresh');
+        }
     }
 }

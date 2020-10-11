@@ -1,9 +1,12 @@
 @if ($results instanceof \Illuminate\Support\Collection)
-  <ul class="font-mono">
+  <table class="font-mono">
     @foreach ($results as $key => $line)
-      <li>{{ $key }}: {{ $line }}</li>
+      <tr>
+        <td class="font-bold">{{ $key }}:</td>
+        <td class="px-4 text-right">{{ $line }}</td>
+      </tr>
     @endforeach
-  </ul>
+  </table>
 @else
   <span class="font-mono">{{ $results }}</span>
 @endif

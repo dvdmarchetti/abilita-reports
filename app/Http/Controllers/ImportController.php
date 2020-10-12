@@ -22,7 +22,7 @@ class ImportController extends Controller
     public function index()
     {
         DB::transaction(function () {
-            Artisan::call('migrate:fresh');
+            Artisan::call('migrate:fresh --force -q');
 
             $files = Storage::files('input');
 

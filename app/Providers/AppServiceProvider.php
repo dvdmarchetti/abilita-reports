@@ -53,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
     public function ensureDatabaseIsMigrated()
     {
         if (! (Schema::hasTable('children') && Schema::hasTable('child_service') && Schema::hasTable('services') && Schema::hasTable('families') && Schema::hasTable('log_messages'))) {
-            Artisan::run('migrate:fresh');
+            Artisan::call('migrate:fresh --force -q');
         }
     }
 }

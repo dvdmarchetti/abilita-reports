@@ -16,7 +16,8 @@ class ServiceCountPerChildren extends QueryObject
     {
         return Child::withCount('services')
             ->get()
-            ->countBy('services_count');
+            ->countBy('services_count')
+            ->sortKeys();
     }
 
     /**

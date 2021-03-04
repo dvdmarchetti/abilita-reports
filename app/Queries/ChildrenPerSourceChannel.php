@@ -28,6 +28,6 @@ class ChildrenPerSourceChannel extends QueryObject
      */
     static public function question()
     {
-        return '12) Quanti bambini per ogni fonte di invio';
+        return '12) Quanti bambini per ogni fonte di invio?';
     }
 }

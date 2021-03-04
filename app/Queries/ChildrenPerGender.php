@@ -27,6 +27,6 @@ class ChildrenPerGender extends QueryObject
      */
     static public function question()
     {
-        return '3) Quanti maschi/quante femmine';
+        return '3) Quanti maschi/quante femmine?';
     }
 }

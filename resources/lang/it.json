@@ -1,0 +1,23 @@
+{
+    "Analysis": "Analisi",
+    "Child": "Bambino",
+    "Children": "Bambini",
+    "Clear filters": "Cancella filtri",
+    "Errors": "Errori",
+    "Existing": "Esistente",
+    "Families": "Famiglie",
+    "Filter": "Filtra",
+    "Import errors": "Errori di importazione",
+    "Import phase": "Fase di importazione",
+    "No import error has been found matching the selected criteria.": "Nessun dato da visualizzare in base ai filtri selezionati.",
+    "Question": "Interrogazione",
+    "Query Results": "Risultati dell'interrogazione",
+    "Result": "Risultato",
+    "Return to Error List": "Lista errori",
+    "Run import": "Avvia importazione",
+    "Service": "Servizio",
+    "Services": "Servizi",
+    "Spreadsheet": "Foglio di lavoro",
+    "Upon insertion": "In inserimento",
+    ":count with more than a child": ":count con più di un figlio"
+}

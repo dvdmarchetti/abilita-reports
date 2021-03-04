@@ -2,30 +2,30 @@
 
 @section('cards')
 <form>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap items-stretch">
     <div class="w-full xl:w-4/12 xl:mb-0 md:px-4">
-      <div class="relative flex flex-col min-w-0 break-words w-full shadow-md rounded bg-white">
+      <div class="relative flex flex-col justify-between min-w-0 break-words w-full h-full shadow-md rounded bg-white">
         <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full max-w-full flex-grow flex-1">
               <h6 class="uppercase text-gray-500 mb-1 text-xs font-semibold">
-                Filter
+                {{ __('Filter') }}
                 @if (\Arr::get(request(), 'filter.service') !== null)
-                  <a href="{{ request()->fullUrlWithQuery(['filter[service]' => '']) }}" class="float-right text-red-700 last:mr-0 mr-1">Clear</a>
+                  <a href="{{ request()->fullUrlWithQuery(['filter[service]' => '']) }}" class="float-right text-red-700 last:mr-0 mr-1">{{ __('Clear filters') }} </a>
                 @endif
               </h6>
               <h2 class="text-gray-800 xl:w-4/12 text-xl font-semibold">
-                Service
+                {{ __('Service') }}
               </h2>
             </div>
           </div>
         </div>
-        <div class="p-4 pt-0 flex-auto">
+        <div class="p-4 pt-0">
           @forelse ($services as $service)
             @if (\Arr::get(request(), 'filter.service') === $service->id)
               <a href="{{ request()->fullUrlWithQuery(['filter[service]' => $service->id]) }}" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-purple-900 bg-purple-200 last:mr-0 mr-1">{{ $service->id }}</a>
             @else
-              <a href="{{ request()->fullUrlWithQuery(['filter[service]' => $service->id]) }}" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-900 bg-gray-200 last:mr-0 mr-1">{{ $service->id }}</a>
+              <a href="{{ request()->fullUrlWithQuery(['filter[service]' => $service->id]) }}" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-900 bg-gray-200 last:mr-0 mr-1 transition duration-100 hover:bg-purple-100">{{ $service->id }}</a>
             @endif
           @empty
             <p>Nessun servizio inserito nel database.</p>
@@ -35,28 +35,28 @@
     </div>
 
     <div class="w-full xl:w-4/12 xl:mb-0 px-4">
-      <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-md rounded bg-white">
+      <div class="relative flex flex-col justify-between min-w-0 break-words w-full h-full mb-6 shadow-md rounded bg-white">
         <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full max-w-full flex-grow flex-1">
               <h6 class="uppercase text-gray-500 mb-1 text-xs font-semibold">
-                Filter
+                {{ __('Filter') }}
                 @if (\Arr::get(request(), 'filter.spreadsheet') !== null)
                   <a href="{{ request()->fullUrlWithQuery(['filter[spreadsheet]' => '']) }}" class="float-right text-red-700 last:mr-0 mr-1">Clear</a>
                 @endif
               </h6>
-              <h2 class="text-gray-800 xl:w-4/12 text-xl font-semibold">
-                Spreadsheet
+              <h2 class="text-gray-800 text-xl font-semibold">
+                {{ __('Spreadsheet') }}
               </h2>
             </div>
           </div>
         </div>
-        <div class="p-4 pt-0 flex-auto">
+        <div class="p-4 pt-0">
           @foreach (['anagrafica-b', 'servizi'] as $spreadsheet)
             @if (\Arr::get(request(), 'filter.spreadsheet') === $spreadsheet)
               <a href="{{ request()->fullUrlWithQuery(['filter[spreadsheet]' => $spreadsheet]) }}" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-900 bg-blue-200 last:mr-0 mr-1">{{ $spreadsheet }}</a>
             @else
-              <a href="{{ request()->fullUrlWithQuery(['filter[spreadsheet]' => $spreadsheet]) }}" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-900 bg-gray-100 last:mr-0 mr-1">{{ $spreadsheet }}</a>
+              <a href="{{ request()->fullUrlWithQuery(['filter[spreadsheet]' => $spreadsheet]) }}" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-900 bg-gray-200 last:mr-0 mr-1 transition duration-100 hover:bg-blue-100">{{ $spreadsheet }}</a>
             @endif
           @endforeach
         </div>
@@ -64,23 +64,23 @@
     </div>
 
     <div class="w-full xl:w-4/12 xl:mb-0 px-4">
-      <div class="relative flex flex-col min-w-0 break-words w-full rounded hover:bg-pink-700" style="transition: all .15s ease">
-        <a href="{{ route('queries.index') }}">
+      <div class="relative min-w-0 break-words w-full h-full rounded hover:bg-pink-700" style="transition: all .15s ease">
+        <a href="{{ route('queries.index') }}" class="flex flex-col justify-between h-full">
           <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
             <div class="flex flex-wrap items-center">
               <div class="relative w-full max-w-full flex-grow flex-1">
                 <h6 class="uppercase text-pink-200 mb-1 text-xs font-semibold">
-                  Analysis
+                  {{ __('Analysis') }}
                 </h6>
                 <h2 class="text-white xl:w-full text-xl font-semibold">
-                  Query Results
+                  {{ __('Query Results') }}
                 </h2>
               </div>
             </div>
           </div>
-          <div class="p-4 pt-0 flex-auto text-right">
+          <div class="p-4 pt-0 text-right">
             <button class="text-white active:bg-teal-300 hover:underline font-bold uppercase text-sm outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">
-              Explore <i class="fas fa-chevron-right text-xs"></i>
+              {{ __('Explore') }} <i class="fas fa-chevron-right text-xs"></i>
             </button>
           </div>
         </a>
@@ -98,9 +98,11 @@
         <div class="flex flex-wrap items-center">
           <div class="relative w-full px-4 max-w-full flex-grow flex-1 flex items-baseline justify-between">
             <h3 class="font-semibold text-base text-gray-800">
-              Import errors ({{ $logs->count() }})
+              {{ __('Import errors') }} ({{ $logs->count() }})
             </h3>
-            <a href="{{ route('imports.index') }}" class="px-2 py-1 bg-pink-200 text-pink-700 rounded-full font-semibold text-sm">Refresh</a>
+            <a href="{{ route('imports.index') }}" class="px-2 py-1 bg-pink-200 text-pink-700 rounded-full font-semibold text-sm hover:bg-pink-300">
+              {{ __('Run import') }}
+            </a>
           </div>
           {{-- <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
             <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" type="button" style="transition:all .15s ease">
@@ -115,16 +117,16 @@
           <thead>
             <tr>
               <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                Service
+                {{ __('Service') }}
               </th>
               <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                Spreadsheet
+                {{ __('Spreadsheet') }}
               </th>
               <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                Child
+                {{ __('Child') }}
               </th>
               <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                Errors
+                {{ __('Errors') }}
               </th>
             </tr>
           </thead>
@@ -150,8 +152,8 @@
                           <thead>
                             <tr>
                               <th></th>
-                              <th class="p-2">Esistente</th>
-                              <th class="p-2">In inserimento</th>
+                              <th class="p-2">{{ __('Existing') }}</th>
+                              <th class="p-2">{{ __('Upon insertion') }}</th>
                             </tr>
                           </thead>
 
@@ -176,7 +178,9 @@
               </tr>
             @empty
               <tr>
-                <td class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm text-center whitespace-no-wrap p-4 text-left" colspan="4">Nessun dato da visualizzare in base ai filtri selezionati.</td>
+                <td class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm text-center whitespace-no-wrap p-4 text-left" colspan="4">
+                  {{ __('No import error has been found matching the selected criteria.') }}
+                </td>
               </tr>
             @endforelse
           </tbody>

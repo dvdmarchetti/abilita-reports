@@ -3,17 +3,17 @@
 @section('cards')
 <div class="flex flex-wrap">
   <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 rounded hover:bg-pink-700" style="transition: all .15s ease">
-      <a href="{{ route('dashboard') }}">
-        <div class="rounded-t mb-0 p-4 bg-transparent">
-          <div class="flex flex-wrap items-center">
-            <div class="relative w-full max-w-full flex-grow flex-1">
-              <h6 class="text-pink-200 uppercase font-bold text-xs">
-                Import phase
-              </h6>
-              <h2 class="text-white xl:w-full text-2xl font-semibold">
-                <i class="fas fa-chevron-left text-base"></i> Return to Error List
-              </h2>
+    <div class="relative flex flex-col min-w-0 break-words w-full h-full mb-6 rounded hover:bg-pink-700" style="transition: all .15s ease">
+      <a href="{{ route('dashboard') }}" class="h-full">
+        <div class="rounded-t mb-0 p-4 bg-transparent h-full">
+          <div class="flex flex-wrap h-full">
+            <h6 class="text-pink-200 uppercase font-bold text-xs">
+              {{ __('Import phase') }}
+            </h6>
+            <div class="text-left w-full self-end">
+              <button class="text-white active:bg-teal-300 hover:underline font-bold uppercase text-sm outline-none focus:outline-none mr-1 mb-1">
+                <i class="fas fa-chevron-left text-xs"></i> {{ __('Return to Error List') }}
+              </button>
             </div>
           </div>
         </div>
@@ -29,18 +29,17 @@
   <x-card title="Children" :value="$childrenCount" icon="child" color="bg-teal-500" />
 
   <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-    <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-md">
-      <div class="flex-auto p-4">
-        <div class="flex flex-wrap">
-          <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-            <h5 class="text-gray-500 uppercase font-bold text-xs">Families</h5>
-            <span class="font-semibold text-2xl text-gray-800">{{ $familiesCount }} <span class="text-base text-gray-600">({{ $familiesWithMoreThanAChildCount }} con più di un figlio)</span></span>
-          </div>
-          <div class="relative w-auto pl-4 flex-initial">
-            <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500">
-              <i class="fa fa-{}"></i>
-            </div>
-          </div>
+    <div class="relative flex p-4 h-full min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-md">
+      <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+        <h5 class="text-gray-500 uppercase font-bold text-xs">{{ __('Families') }}</h5>
+        <span class="font-semibold text-4xl text-gray-800">
+          {{ $familiesCount }}
+          <span class="block text-xs text-gray-600">({{ __(':count with more than a child', ['count' => $familiesWithMoreThanAChildCount]) }})</span>
+        </span>
+      </div>
+      <div class="relative w-auto pl-4 flex-initial">
+        <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500">
+          <i class="fa fa-users"></i>
         </div>
       </div>
     </div>
@@ -73,25 +72,23 @@
         <table class="items-center table-auto w-full bg-transparent border-collapse">
           <thead>
             <tr>
-              <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+              {{-- <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                 Key
+              </th> --}}
+              <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                {{ __('Question') }}
               </th>
               <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                Question
-              </th>
-              <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                Results
+                {{ __('Result') }}
               </th>
             </tr>
           </thead>
           <tbody>
             @forelse($queries as $key => $query)
               <tr class="odd:bg-white bg-gray-100">
-                <th class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4 text-left">
-                  {{ $key }}
-                </th>
                 <td class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
-                  {{ $query->question() }}
+                  <p class="text-xs font-semibold text-gray-500">{{ $key }}</p>
+                  <p>{{ $query->question() }}</p>
                 </td>
                 <td class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
                   {{ $query->view() }}

@@ -3,7 +3,7 @@
 @section('cards')
 <form>
   <div class="flex flex-wrap items-stretch">
-    <div class="w-full xl:w-4/12 xl:mb-0 md:px-4">
+    <div class="w-full lg:w-4/12 lg:mb-0 lg:px-4 mb-4">
       <div class="relative flex flex-col justify-between min-w-0 break-words w-full h-full shadow-md rounded bg-white">
         <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div class="flex flex-wrap items-center">
@@ -11,7 +11,7 @@
               <h6 class="uppercase text-gray-500 mb-1 text-xs font-semibold">
                 {{ __('Filter') }}
                 @if (\Arr::get(request(), 'filter.service') !== null)
-                  <a href="{{ request()->fullUrlWithQuery(['filter[service]' => '']) }}" class="float-right text-red-700 last:mr-0 mr-1">{{ __('Clear filters') }} </a>
+                  <a href="{{ request()->fullUrlWithQuery(['filter[service]' => '']) }}" class="float-right text-red-700 last:mr-0 mr-1 hover:underline">{{ __('Clear filters') }} </a>
                 @endif
               </h6>
               <h2 class="text-gray-800 xl:w-4/12 text-xl font-semibold">
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="w-full xl:w-4/12 xl:mb-0 px-4">
+    <div class="w-full lg:w-4/12 lg:mb-0 lg:px-4 mb-4">
       <div class="relative flex flex-col justify-between min-w-0 break-words w-full h-full mb-6 shadow-md rounded bg-white">
         <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div class="flex flex-wrap items-center">
@@ -42,7 +42,7 @@
               <h6 class="uppercase text-gray-500 mb-1 text-xs font-semibold">
                 {{ __('Filter') }}
                 @if (\Arr::get(request(), 'filter.spreadsheet') !== null)
-                  <a href="{{ request()->fullUrlWithQuery(['filter[spreadsheet]' => '']) }}" class="float-right text-red-700 last:mr-0 mr-1">Clear</a>
+                  <a href="{{ request()->fullUrlWithQuery(['filter[spreadsheet]' => '']) }}" class="float-right text-red-700 last:mr-0 mr-1 hover:underline">{{ __('Clear filters') }}</a>
                 @endif
               </h6>
               <h2 class="text-gray-800 text-xl font-semibold">
@@ -63,8 +63,8 @@
       </div>
     </div>
 
-    <div class="w-full xl:w-4/12 xl:mb-0 px-4">
-      <div class="relative min-w-0 break-words w-full h-full rounded hover:bg-pink-700" style="transition: all .15s ease">
+    <div class="w-full lg:w-4/12 lg:mb-0 lg:px-4 mb-4">
+      <div class="relative min-w-0 break-words w-full h-full rounded hover:bg-pink-700 border-2 border-pink-500 hover:border-pink-700" style="transition: all .15s ease">
         <a href="{{ route('queries.index') }}" class="flex flex-col justify-between h-full">
           <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
             <div class="flex flex-wrap items-center">
@@ -92,17 +92,22 @@
 
 @section('content')
 <div class="flex flex-wrap">
-  <div class="w-full mb-12 xl:mb-0 px-4">
+  <div class="w-full mb-12 lg:mb-0 lg:px-4">
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-md rounded">
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex flex-wrap items-center">
-          <div class="relative w-full px-4 max-w-full flex-grow flex-1 flex items-baseline justify-between">
+          <div class="relative w-full max-w-full flex-grow flex-1 flex items-baseline justify-between">
             <h3 class="font-semibold text-base text-gray-800">
               {{ __('Import errors') }} ({{ $logs->count() }})
             </h3>
-            <a href="{{ route('imports.index') }}" class="px-2 py-1 bg-pink-200 text-pink-700 rounded-full font-semibold text-sm hover:bg-pink-300">
-              {{ __('Run import') }}
-            </a>
+            <div>
+              <a href="{{ route('imports.cleanup') }}" class="px-3 py-1 text-gray-500 text-sm hover:underline">
+                {{ __('Clean all data') }}
+              </a>
+              <a href="{{ route('imports.index') }}" class="px-3 py-1 bg-pink-200 text-pink-700 rounded-full font-semibold text-sm hover:underline">
+                {{ __('Run import') }}
+              </a>
+            </div>
           </div>
           {{-- <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
             <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" type="button" style="transition:all .15s ease">
@@ -116,16 +121,16 @@
         <table class="items-center table-auto w-full bg-transparent border-collapse">
           <thead>
             <tr>
-              <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+              <th class="px-4 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                 {{ __('Service') }}
               </th>
-              <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+              <th class="px-4 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                 {{ __('Spreadsheet') }}
               </th>
-              <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+              <th class="px-4 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                 {{ __('Child') }}
               </th>
-              <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+              <th class="px-4 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                 {{ __('Errors') }}
               </th>
             </tr>
@@ -133,16 +138,16 @@
           <tbody>
             @forelse($logs as $log)
               <tr class="odd:bg-white bg-gray-100">
-                <th class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4 text-left">
+                <th class="border-t-0 px-4 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4 text-left">
                   {{ $log->service }}
                 </th>
-                <td class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
+                <td class="border-t-0 px-4 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
                   {{ $log->spreadsheet }}
                 </td>
-                <td class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
+                <td class="border-t-0 px-4 align-top border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
                   {{ $log->child }}
                 </td>
-                <td class="border-t-0 px-6 border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
+                <td class="border-t-0 px-4 border-l-0 border-r-0 text-sm whitespace-no-wrap p-4">
                   <ul class="list-disc">
                     @foreach ($log->errors as $error)
                       @if (! is_string($error))
@@ -178,7 +183,7 @@
               </tr>
             @empty
               <tr>
-                <td class="border-t-0 px-6 align-top border-l-0 border-r-0 text-sm text-center whitespace-no-wrap p-4 text-left" colspan="4">
+                <td class="border-t-0 px-4 align-top border-l-0 border-r-0 text-sm text-center whitespace-no-wrap p-4 text-left" colspan="4">
                   {{ __('No import error has been found matching the selected criteria.') }}
                 </td>
               </tr>

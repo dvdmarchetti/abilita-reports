@@ -61,4 +61,10 @@ class ImportController extends Controller
     {
         //
     }
+
+    public function cleanup(Request $request)
+    {
+        Artisan::call('migrate:fresh --force -q');
+        return redirect()->route('dashboard');
+    }
 }

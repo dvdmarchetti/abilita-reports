@@ -34,7 +34,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Validator::extend('same_insensitive', function ($attribute, $value, $parameters, $validator) {
             foreach ($parameters as $parameter) {
-                if (strtolower($validator->attributes()[$parameter]) !== strtolower($value) && !in_array(strtolower($validator->attributes()[$parameter]), static::$notAvailableWords)) {
+                $parameter_value = strtolower(data_get($validator->attributes(), $parameter));
+                if ($parameter_value !== strtolower($value) && !in_array($parameter_value, static::$notAvailableWords)) {
                     return false;
                 }
             }

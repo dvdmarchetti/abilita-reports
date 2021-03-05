@@ -8,15 +8,15 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Concerns\HasReferencesToOtherSheets;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Validators\Failure;
 use Psr\Log\LogLevel;
 
-abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow, WithCalculatedFormulas, WithValidation
+abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow, WithCalculatedFormulas, HasReferencesToOtherSheets
 {
     use ExcelNormalizer;
 

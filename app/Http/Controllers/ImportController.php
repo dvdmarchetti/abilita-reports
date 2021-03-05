@@ -21,7 +21,7 @@ class ImportController extends Controller
      */
     public function index()
     {
-        DB::transaction(function () {
+        // DB::transaction(function () {
             Artisan::call('migrate:fresh --force -q');
 
             $files = Storage::files('input');
@@ -36,7 +36,7 @@ class ImportController extends Controller
             // Remove all the children without services
             Child::whereDoesntHave('services')->delete();
             Family::whereDoesntHave('children')->delete();
-        });
+        // });
 
         return redirect()->route('dashboard');
     }

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <script src="https://kit.fontawesome.com/fd0c6609cb.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css" />
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css" /> --}}
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Bilancio Sociale {{ date('Y') - 1 }}</title>
     <style>
     .odd\:bg-white:nth-child(odd) {
@@ -14,7 +15,7 @@
     </style>
   </head>
   <body class="text-gray-800 antialiased bg-gray-100">
-    <div class="relative bg-pink-600 md:pt-12 pb-32 pt-12">
+    <div class="relative bg-pink-500 md:pt-12 pb-24 pt-12">
       <div class="px-4 md:px-10 mx-auto w-full">
         <div>
           @yield('cards')

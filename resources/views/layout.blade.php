@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#000000" />
     <script src="https://kit.fontawesome.com/fd0c6609cb.js" crossorigin="anonymous"></script>
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css" /> --}}
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ asset('styles/tailwind.min.css') }}" rel="stylesheet">
     <title>Bilancio Sociale {{ date('Y') - 1 }}</title>
     <style>
     .odd\:bg-white:nth-child(odd) {

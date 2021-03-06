@@ -2,7 +2,7 @@
 
 @section('cards')
   <div class="flex flex-wrap xl:mb-4">
-    <div class="w-full md:w-6/12 md:px-2 xl:w-3/12 xl:px-4 mb-4">
+    <div class="w-full md:w-1/3 md:px-4 mb-4">
       <div class="relative flex flex-col min-w-0 break-words w-full h-full mb-6 rounded hover:bg-pink-600 border-2 border-pink-400 hover:border-pink-600" style="transition: all .15s ease">
         <a href="{{ route('dashboard') }}" class="h-full">
           <div class="rounded-t mb-0 p-4 bg-transparent h-full">
@@ -23,7 +23,7 @@
 
     <x-card title="Children" :value="$childrenCount" icon="child" color="bg-green-500" />
 
-    <div class="w-full md:w-6/12 md:px-2 xl:w-3/12 xl:px-4 mb-4">
+    <div class="w-full md:w-1/3 md:px-4 mb-4">
       <div class="relative flex p-4 h-full min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-md">
         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
           <h5 class="text-gray-500 uppercase font-semibold text-xs">{{ __('Families') }}</h5>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <x-card title="Services" :value="$servicesCount" icon="cogs" color="bg-purple-500" />
+    {{-- <x-card title="Services" :value="$servicesCount" icon="cogs" color="bg-purple-500" /> --}}
   </div>
 @endsection
 

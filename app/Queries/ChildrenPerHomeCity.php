@@ -30,6 +30,6 @@ class ChildrenPerHomeCity extends QueryObject
      */
     static public function question()
     {
-        return '6) Quanti residenti a Milano? Quanti fuori Milano?';
+        return 'Quanti residenti a Milano? Quanti fuori Milano?';
     }
 }

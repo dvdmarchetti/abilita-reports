@@ -25,6 +25,6 @@ class ChildrenPerService extends QueryObject
      */
     static public function question()
     {
-        return '2) Conteggio di bambini per servizio';
+        return 'Conteggio di bambini per servizio';
     }
 }

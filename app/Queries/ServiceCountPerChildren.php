@@ -27,6 +27,6 @@ class ServiceCountPerChildren extends QueryObject
      */
     static public function question()
     {
-        return '14) Conteggio di bambini per numero di servizi';
+        return 'Conteggio di bambini per numero di servizi';
     }
 }

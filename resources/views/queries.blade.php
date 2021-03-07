@@ -73,7 +73,7 @@
                 <td class="border-t-0 border-l-0 border-r-0 md:table-cell table-row">
                   <div class="sm:block table-cell w-full px-4 align-top border-l-0 border-r-0 text-sm p-4 md:py-4 pb-1 py-2">
                     <p class="text-xs font-semibold text-gray-500">{{ $key }}</p>
-                    <p>{{ $query->question() }}</p>
+                    <p>{{ $loop->iteration }}) {{ $query->question() }}</p>
                   </div>
                 </td>
                 <td class="border-t-0 border-l-0 border-r-0 md:table-cell table-row">

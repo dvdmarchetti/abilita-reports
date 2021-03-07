@@ -30,6 +30,6 @@ class ChildrenPerNationality extends QueryObject
      */
     static public function question()
     {
-        return '5) Quanti per nazionalità? Italiana o Straniera';
+        return 'Quanti per nazionalità? Italiana o Straniera';
     }
 }

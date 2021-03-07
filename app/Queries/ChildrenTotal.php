@@ -24,6 +24,6 @@ class ChildrenTotal extends QueryObject
      */
     static public function question()
     {
-        return '1) Totale dei bambini iscritti nel '.config('bs.year');
+        return 'Totale dei bambini iscritti nel '.config('bs.year');
     }
 }

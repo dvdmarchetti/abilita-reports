@@ -39,6 +39,6 @@ class ChildrenPerMaxDiagnosis extends QueryObject
      */
     static public function question()
     {
-        return '8) Quanti bambini con più diagnosi?';
+        return 'Quanti bambini con più diagnosi?';
     }
 }

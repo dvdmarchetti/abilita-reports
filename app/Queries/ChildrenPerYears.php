@@ -43,6 +43,6 @@ class ChildrenPerYears extends QueryObject
      */
     static public function question()
     {
-        return '9) Quanti bambini per quanti anni sono in carico a L’abilità?';
+        return 'Quanti bambini per quanti anni sono in carico a L’abilità?';
     }
 }

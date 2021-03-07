@@ -14,7 +14,7 @@ class ChildrenPerMaxDiagnosis extends QueryObject
      */
     public function results()
     {
-        return ChildService::query()
+        $childrenPerDiagnosis = ChildService::query()
             ->selectRaw('count(distinct child_id) as bambini, max(diagnosis_count) as diagnosis')
             ->groupBy('child_id')
             ->get()
@@ -22,6 +22,14 @@ class ChildrenPerMaxDiagnosis extends QueryObject
                 return $row->diagnosis;
             })
             ->sortKeys();
+
+        foreach ($childrenPerDiagnosis as $i => $count) {
+            for ($j = 1; $j < $i; $j++) {
+                $childrenPerDiagnosis->put($j, $childrenPerDiagnosis->get($j) + $count);
+            }
+        }
+
+        return $childrenPerDiagnosis;
     }
 
     /**

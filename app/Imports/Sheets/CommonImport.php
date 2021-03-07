@@ -2,7 +2,7 @@
 
 namespace App\Imports\Sheets;
 
-use App\Imports\ServiceImport;
+use App\Imports\ExcelWorksheetImport;
 use App\LogMessage;
 use App\Traits\ExcelNormalizer;
 use Illuminate\Support\Collection;
@@ -34,7 +34,7 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
      *
      * @var \App\Imports\ServiceImport
      */
-    protected ServiceImport $spreadsheet;
+    protected ExcelWorksheetImport $spreadsheet;
 
 
     /**

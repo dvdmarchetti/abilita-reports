@@ -22,7 +22,7 @@ class ImportController extends Controller
      */
     public function run()
     {
-        // DB::transaction(function () {
+        DB::transaction(function () {
             Artisan::call('migrate:fresh --force -q');
 
             $this->processFolder('input/children', function ($service, $file) {
@@ -34,7 +34,7 @@ class ImportController extends Controller
             });
 
             $this->removeExtraData();
-        // });
+        });
 
         return redirect()->route('dashboard');
     }
@@ -72,6 +72,14 @@ class ImportController extends Controller
                         });
                 });
         })->delete();
+
+        // Child::whereHas('services', function ($query) {
+        //     $query->whereYear('end_of_charge', '<', config('bs.year'))
+        //         ->orWhere(function ($query) {
+        //             $query->whereYear('first_appearance', '<', 9999)
+        //                 ->whereYear('first_appearance', '>', config('bs.year'));
+        //         });
+        // })->delete();
 
         // Child::whereDoesntHave('services')->delete();
         Family::whereDoesntHave('children')->delete();

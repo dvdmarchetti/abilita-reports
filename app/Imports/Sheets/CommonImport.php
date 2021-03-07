@@ -69,7 +69,7 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
         })->reject(function ($row) {
             // echo '<pre>'.json_encode($row, JSON_PRETTY_PRINT);
             // exit();
-            return Str::startsWith($row['id_bambino'], ['BN', 'B-A']);
+            return Str::startsWith($row['id_bambino'], config('bs.import.rejected_ids'));
         })->filter(function ($row) {
             return $this->validate($row);
         })->each(function ($row) {

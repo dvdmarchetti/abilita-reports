@@ -30,9 +30,9 @@ class CreateChildServiceTable extends Migration
             $table->string('source');
 
             $table->string('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('service_id')->references('id')->on('services')->cascadeOnDelete();
             $table->string('child_id');
-            $table->foreign('child_id')->references('id')->on('children');
+            $table->foreign('child_id')->references('id')->on('children')->cascadeOnDelete();
 
             $table->timestamps();
         });

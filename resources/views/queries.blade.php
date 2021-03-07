@@ -29,7 +29,7 @@
           <h5 class="text-gray-500 uppercase font-semibold text-xs">{{ __('Families') }}</h5>
           <span class="font-semibold text-4xl text-gray-800">
             {{ $familiesCount }}
-            <span class="block text-xs text-gray-600">({{ __(':count with more than a child', ['count' => $familiesWithMoreThanAChildCount]) }})</span>
+            <span class="block text-xs text-gray-600">({{ __(':count with more than a child', ['count' => $familiesWithMoreThanOneChildCount]) }})</span>
           </span>
         </div>
         <div class="relative w-auto pl-4 flex-initial">
@@ -39,14 +39,12 @@
         </div>
       </div>
     </div>
-
-    {{-- <x-card title="Services" :value="$servicesCount" icon="cogs" color="bg-purple-500" /> --}}
   </div>
 @endsection
 
 @section('content')
 <div class="flex flex-wrap mt-4 -mt-24">
-  <div class="w-full pb-12 xl:mb-0 xl:px-4 md:px-2">
+  <div class="w-full pb-12 xl:mb-0 md:px-4">
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-md rounded">
       <div class="rounded-t mb-0 px-4 border-0">
         <div class="flex flex-wrap h-12 items-center">
@@ -58,15 +56,9 @@
         </div>
       </div>
       <div class="block w-full overflow-x-auto -mt-px">
-        <!-- Projects table -->
         <table class="items-center table-auto w-full bg-transparent border-collapse">
           <thead>
             <tr class="h-12">
-              {{--
-              <th class="px-4 bg-gray-50 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                Key
-              </th>
-              --}}
               <th class="px-4 bg-gray-50 text-gray-600 align-middle border border-solid border-gray-100 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                 {{ __('Question') }}
               </th>

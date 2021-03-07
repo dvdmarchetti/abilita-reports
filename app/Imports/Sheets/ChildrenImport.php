@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Sheets;
 
 use App\Child;
 use App\Family;

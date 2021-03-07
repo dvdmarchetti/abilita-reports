@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'dashboard');
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-Route::resource('imports', ImportController::class)->only('index', 'create', 'store');
-Route::get('imports/cleanup', [ImportController::class, 'cleanup'])->name('imports.cleanup');
+Route::post('imports', [ImportController::class, 'run'])->name('imports.run');
+Route::delete('imports', [ImportController::class, 'cleanup'])->name('imports.cleanup');
 Route::resource('queries', QueryController::class)->only('index', 'show');
 Route::resource('logs', LogController::class)->only('index', 'show');

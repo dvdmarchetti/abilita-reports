@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Sheets;
 
 use App\Child;
 use Carbon\Carbon;
@@ -17,8 +17,8 @@ class ServicesImport extends CommonImport
      */
     protected $dates = [
         'data_di_nascita',
-        'data_inizio_frequenza',
-        'data_fine_frequenza',
+        'data_inizio_frequenza_servizio_iscrizione_annuale',
+        'data_fine_frequenza_servizio_dimissione_annuale',
     ];
 
     /**
@@ -27,8 +27,8 @@ class ServicesImport extends CommonImport
      * @var array
      */
     protected $years = [
-        'data_presa_in_carico_servizio_anno',
-        'fine_presa_in_carico_servizio_anno',
+        'anno_inizio_presa_in_carico_dal_servizio', // 'data_presa_in_carico_servizio_anno',
+        'anno_fine_presa_in_carico_dal_servizio', // 'fine_presa_in_carico_servizio_anno',
     ];
 
     /**
@@ -60,13 +60,13 @@ class ServicesImport extends CommonImport
             'diagnosi_2' => 'nullable|string',
             'diagnosi_3' => 'nullable|string',
 
-            'data_presa_in_carico_servizio_anno' => 'required|date',
-            'fine_presa_in_carico_servizio_anno' => 'nullable|present|date',
-            'motivo_fine_presa_in_carico' => 'nullable|in:DIMISSIONE,MOTIVI ECONOMICI,ALTRI MOTIVI,TRASFERIMENTO,VOLONTARIA',
+            'anno_inizio_presa_in_carico_dal_servizio' => 'required|date',
+            'anno_fine_presa_in_carico_dal_servizio' => 'nullable|present|date',
+            'motivo_fine_della_presa_in_carico' => 'nullable|in:DIMISSIONE,MOTIVI ECONOMICI,ALTRI MOTIVI,TRASFERIMENTO,VOLONTARIA',
 
-            'data_inizio_frequenza' => 'required|date|before:today',
-            'data_fine_frequenza' => 'nullable|date|before:today',
-            'mesi_frequenza_servizio_anno_solare' => 'required|integer|min:0|max:12',
+            'data_inizio_frequenza_servizio_iscrizione_annuale' => 'required|date|before:today',
+            'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',
+            'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
             'fonte_invio' => 'required|string|in:ATS,SERVIZI SOCIALI,SPONTANEA,UONPIA,CASE MANAGER,SCUOLA,SERVIZIO INTERNO ABILITÀ,ALTRO',
         ];
     }
@@ -81,7 +81,7 @@ class ServicesImport extends CommonImport
     {
         return parent::collection(
             $rows->reject(function ($row) {
-                return $this->isInvalidYearForImport($row['data_presa_in_carico_servizio_anno']);
+                return $this->isInvalidYearForImport($row['anno_inizio_presa_in_carico_dal_servizio']);
             })->reject(function ($row) {
                 return Str::contains($row['note_diagnosi'], 'NOTA::: figlio');
             })
@@ -116,12 +116,12 @@ class ServicesImport extends CommonImport
             // '' => $row['diagnosi_prevalente'],
             // '' => $row['diagnosi_2'],
             // '' => $row['diagnosi_3'],
-            'first_appearance' => $row['data_presa_in_carico_servizio_anno'],
-            'end_of_charge' => $row['fine_presa_in_carico_servizio_anno'],
-            'end_reason' => $row['motivo_fine_presa_in_carico'],
-            'from' => $row['data_inizio_frequenza'],
-            'to' => $row['data_fine_frequenza'],
-            'attendance_months' => $row['mesi_frequenza_servizio_anno_solare'],
+            'first_appearance' => $row['anno_inizio_presa_in_carico_dal_servizio'],
+            'end_of_charge' => $row['anno_fine_presa_in_carico_dal_servizio'],
+            'end_reason' => $row['motivo_fine_della_presa_in_carico'],
+            'from' => $row['data_inizio_frequenza_servizio_iscrizione_annuale'],
+            'to' => $row['data_fine_frequenza_servizio_dimissione_annuale'],
+            'attendance_months' => $row['mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano'],
             'source' => $row['fonte_invio'],
         ]);
     }

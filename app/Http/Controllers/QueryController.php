@@ -63,7 +63,7 @@ class QueryController extends Controller
     {
         $childrenCount = Child::count();
         $familiesCount = Family::count();
-        $familiesWithMoreThanAChildCount = Family::has('children', '>', 1)->count();
+        $familiesWithMoreThanOneChildCount = Family::withMoreThanOneChild()->count();
         $servicesCount = Service::count();
 
         $queries = $this->queries->map(function ($class) {
@@ -74,7 +74,7 @@ class QueryController extends Controller
             'queries',
             'childrenCount',
             'familiesCount',
-            'familiesWithMoreThanAChildCount',
+            'familiesWithMoreThanOneChildCount',
             'servicesCount',
         ));
     }

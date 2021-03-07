@@ -6,7 +6,7 @@ use App\Service;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class BilancioSocialeImport implements WithMultipleSheets
+abstract class ExcelWorksheetImport implements WithMultipleSheets
 {
     use Importable;
 
@@ -18,7 +18,7 @@ class BilancioSocialeImport implements WithMultipleSheets
     protected Service $service;
 
     /**
-     * Set the current service that is ipmorting the child
+     * Set the current service that is importing the child
      *
      * @param [type] $service
      * @return void
@@ -32,19 +32,7 @@ class BilancioSocialeImport implements WithMultipleSheets
         return $this;
     }
 
-    /**
-     * Process different worksheets with different importers.
-     *
-     * @return array
-     */
-    public function sheets(): array
-    {
-        return [
-            'ANAGRAFICA-B' => new ChildrenImport($this),
-            'SERVIZIO' => new ServicesImport($this),
-            // 'ANAGRAFICA-F' => new FamiliesImport($this),
-        ];
-    }
+    abstract public function sheets(): array;
 
     /**
      * Return the service instance.

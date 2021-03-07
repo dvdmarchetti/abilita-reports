@@ -90,7 +90,7 @@
 
 @section('content')
 <div class="flex flex-wrap">
-  <div class="w-full mb-12 lg:mb-0 lg:px-4">
+  <div class="w-full mb-12 lg:px-4">
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-md rounded">
       <div class="rounded-t mb-0 px-4 border-0">
         <div class="flex flex-wrap h-12 items-center">
@@ -99,12 +99,19 @@
               {{ __('Import errors') }} ({{ $logs->count() }})
             </h3>
             <div>
-              <a href="{{ route('imports.cleanup') }}" class="inline-block px-3 py-1 text-gray-500 text-sm hover:underline">
-                {{ __('Clean all data') }}
-              </a>
-              <a href="{{ route('imports.index') }}" class="inline-block px-3 py-1 bg-pink-200 text-pink-700 rounded-full font-semibold text-sm hover:underline">
-                {{ __('Run import') }}
-              </a>
+              <form class="inline-block" action="{{ route('imports.cleanup') }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="bg-transparent border-0 inline-block px-3 py-1 text-gray-500 text-sm hover:underline">
+                  {{ __('Clean all data') }}
+                </button>
+              </form>
+              <form class="inline-block" action="{{ route('imports.run') }}" method="POST">
+                @csrf
+                <button class="inline-block px-3 py-1 bg-pink-200 text-pink-700 rounded-full font-semibold text-sm hover:underline">
+                  {{ __('Run import') }}
+                </button>
+              </form>
             </div>
           </div>
           {{-- <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">

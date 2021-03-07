@@ -118,6 +118,8 @@ return [
     'url'                  => 'Il formato del campo :attribute non è valido.',
     'uuid'                 => ':attribute deve essere un UUID valido.',
 
+    'same_insensitive' => ':attribute e :other devono coincidere.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

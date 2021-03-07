@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Sheets;
 
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;

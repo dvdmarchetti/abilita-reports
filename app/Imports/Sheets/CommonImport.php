@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Sheets;
 
+use App\Imports\ServiceImport;
 use App\LogMessage;
 use App\Traits\ExcelNormalizer;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -30,9 +32,9 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
     /**
      * Hold the parent multi-import instance
      *
-     * @var \App\Imports\BilancioSocialeImport
+     * @var \App\Imports\ServiceImport
      */
-    protected BilancioSocialeImport $spreadsheet;
+    protected ServiceImport $spreadsheet;
 
 
     /**
@@ -65,12 +67,24 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
         return $rows->reject(function ($row) {
             return $row->except($this->years + $this->dates)->filter()->count() === 0;
         })->reject(function ($row) {
-            return strpos($row['id_bambino'], 'BN') === 0;
+            // echo '<pre>'.json_encode($row, JSON_PRETTY_PRINT);
+            // exit();
+            return Str::startsWith($row['id_bambino'], ['BN', 'B-A']);
         })->filter(function ($row) {
             return $this->validate($row);
         })->each(function ($row) {
             $this->store($row);
         });
+    }
+
+    /**
+     * Skip first row which contains last update timestamp.
+     *
+     * @return integer
+     */
+    public function headingRow(): int
+    {
+        return 2;
     }
 
     /**

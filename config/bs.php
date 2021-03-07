@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'year' => 2019,
+    'year' => date('Y') - 1,
     'regex' => '',
 ];

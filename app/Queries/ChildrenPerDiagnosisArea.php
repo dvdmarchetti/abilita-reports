@@ -28,6 +28,6 @@ class ChildrenPerDiagnosisArea extends QueryObject
      */
     static public function question()
     {
-        return 'Quanti bambini per (area di) diagnosi?';
+        return 'Quanti bambini per area di diagnosi?';
     }
 }

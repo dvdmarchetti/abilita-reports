@@ -29,6 +29,8 @@ class CreateChildServiceTable extends Migration
 
             $table->string('source');
 
+            $table->boolean('is_active')->default(false);
+
             $table->string('service_id');
             $table->foreign('service_id')->references('id')->on('services')->cascadeOnDelete();
             $table->string('child_id');

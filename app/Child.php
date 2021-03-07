@@ -32,6 +32,20 @@ class Child extends Model
     ];
 
     /**
+     * Filter for active children. A child is active if he has
+     * at least one active service.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->whereHas('services', function ($query) {
+            $query->where('is_active', true);
+        });
+    }
+
+    /**
      * Retrieve the related family of the child.
      *
      * @return \App\Family

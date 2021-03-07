@@ -123,6 +123,7 @@ class ServicesImport extends CommonImport
             'to' => $row['data_fine_frequenza_servizio_dimissione_annuale'],
             'attendance_months' => $row['mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano'],
             'source' => $row['fonte_invio'],
+            'is_active' => ($row['attivo'] === 'SI') ? true : false,
         ]);
     }
 

@@ -30,6 +30,6 @@ class ChildrenPerServiceByMonths extends QueryObject
      */
     static public function question()
     {
-        return 'Quanti bambini per quanti mesi hanno frequentato il servizio nel 2019? Da 1 a 12 mesi';
+        return 'Quanti bambini per quanti mesi hanno frequentato il servizio nel '. config('bs.year') .'? Da 1 a 12 mesi';
     }
 }

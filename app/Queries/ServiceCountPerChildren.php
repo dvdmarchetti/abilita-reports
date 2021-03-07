@@ -14,10 +14,18 @@ class ServiceCountPerChildren extends QueryObject
      */
     public function results()
     {
-        return Child::withCount('services')
+        $childrenPerService = Child::withCount('services')
             ->get()
             ->countBy('services_count')
             ->sortKeys();
+
+        foreach ($childrenPerService as $i => $count) {
+            for ($j = 1; $j < $i; $j++) {
+                $childrenPerService->put($j, $childrenPerService->get($j) + $count);
+            }
+        }
+
+        return $childrenPerService;
     }
 
     /**

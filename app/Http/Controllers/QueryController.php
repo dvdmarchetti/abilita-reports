@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Child;
 use App\Family;
-use App\LogMessage;
+use App\Queries\ChildrenActive;
 use App\Queries\ChildrenPerAgeRange;
 use App\Queries\ChildrenPerDiagnosisArea;
 use App\Queries\ChildrenPerEndReason;
@@ -12,6 +12,7 @@ use App\Queries\ChildrenPerGender;
 use App\Queries\ChildrenPerHomeCity;
 use App\Queries\ChildrenPerMaxDiagnosis;
 use App\Queries\ChildrenPerNationality;
+use App\Queries\ChildrenPerNationalityItalianOrOther;
 use App\Queries\ChildrenPerService;
 use App\Queries\ChildrenPerServiceByMonths;
 use App\Queries\ChildrenPerSourceChannel;
@@ -20,7 +21,6 @@ use App\Queries\ChildrenTotal;
 use App\Queries\ChildrenWithMoreThanOneService;
 use App\Queries\ServiceCountPerChildren;
 use App\Service;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class QueryController extends Controller
@@ -32,9 +32,11 @@ class QueryController extends Controller
      */
     protected $queryList = [
         ChildrenTotal::class,
+        ChildrenActive::class,
         ChildrenPerService::class,
         ChildrenPerGender::class,
         ChildrenPerAgeRange::class,
+        ChildrenPerNationalityItalianOrOther::class,
         ChildrenPerNationality::class,
         ChildrenPerHomeCity::class,
         ChildrenPerDiagnosisArea::class,

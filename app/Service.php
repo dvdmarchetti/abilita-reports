@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Scopes\PastYearScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -21,6 +20,11 @@ class Service extends Model
      */
     protected $guarded = [];
 
+    /**
+     * Retrieve the children whose are taking part in the service.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function children()
     {
         return $this->belongsToMany(Child::class);

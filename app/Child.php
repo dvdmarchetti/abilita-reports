@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Relations\ChildService;
-use App\Scopes\SQLiteCollateNocaseScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Child extends Model
@@ -31,11 +31,21 @@ class Child extends Model
         'birth_date',
     ];
 
+    /**
+     * Retrieve the related family of the child.
+     *
+     * @return \App\Family
+     */
     public function family()
     {
         return $this->belongsTo(Family::class);
     }
 
+    /**
+     * Retrieve the services associated with this child.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function services()
     {
         return $this->belongsToMany(Service::class)

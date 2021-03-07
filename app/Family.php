@@ -20,6 +20,22 @@ class Family extends Model
      */
     protected $guarded = [];
 
+    /**
+     * Filter families on children count.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithMoreThanOneChild($query)
+    {
+        return $query->has('children', '>', 1);
+    }
+
+    /**
+     * Retrieve the children of this family.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function children()
     {
         return $this->hasMany(Child::class);

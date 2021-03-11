@@ -52,10 +52,12 @@ class ImportController extends Controller
         $files = Storage::files($path);
 
         foreach ($files as $file) {
-            $service = Str::of($file)->match('/SCHEDA UNICA (?:GESTIONE UTENTI-|GU_)(.+)_rev/');
-            Log::channel('import')->info('Processing service input file.', ['filename' => $file]);
+            if (! Str::of($file)->startsWith('.')) {
+                $service = Str::of($file)->match('/SCHEDA UNICA (?:GESTIONE UTENTI-|GU_)(.+)_rev/');
+                Log::channel('import')->info('Processing service input file.', ['filename' => $file]);
 
-            $callback($service, $file);
+                $callback($service, $file);
+            }
         }
     }
 

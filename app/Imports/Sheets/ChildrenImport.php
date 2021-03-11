@@ -41,9 +41,9 @@ class ChildrenImport extends CommonImport
             'sesso' => ['in:M,F'],
             'data_di_nascita' => ['required', 'date'],
 
-            'luogo_di_nascita_citta' => ['nullable', 'string'],
-            'luogo_di_nascita_nazione' => ['nullable', 'string'],
-            'nazionalita' => ['string'],
+            'luogo_di_nascita_citta' => ['required', 'string'],
+            'luogo_di_nascita_nazione' => ['required', 'string'],
+            'nazionalita' => ['required'],
 
             'residenza_citta' => ['bail', 'same_insensitive:area_metropolitana'],
             'residenza_prov' => ['string', 'size:2'],

@@ -22,19 +22,19 @@ class ImportController extends Controller
      */
     public function run()
     {
-        DB::transaction(function () {
+        // DB::transaction(function () {
             Artisan::call('migrate:fresh --force -q');
 
             $this->processFolder('input/children', function ($service, $file) {
                 (new ChildServiceImport)->for($service)->import($file);
             });
 
-            $this->processFolder('input/families', function ($service, $file) {
-                (new FamilyServiceImport)->for($service)->import($file);
-            });
+            // $this->processFolder('input/families', function ($service, $file) {
+            //     (new FamilyServiceImport)->for($service)->import($file);
+            // });
 
             $this->removeExtraData();
-        });
+        // });
 
         return redirect()->route('dashboard');
     }

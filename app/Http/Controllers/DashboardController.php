@@ -12,8 +12,6 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $childrenCount = Child::count();
-        $familiesCount = Family::count();
         $services = Service::all();
         $logsCount = LogMessage::count();
         $logs = QueryBuilder::for(LogMessage::class)
@@ -21,8 +19,6 @@ class DashboardController extends Controller
             ->get();
 
         return view('dashboard', compact(
-            'childrenCount',
-            'familiesCount',
             'services',
             'logs',
             'logsCount',

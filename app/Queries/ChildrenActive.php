@@ -24,6 +24,6 @@ class ChildrenActive extends QueryObject
      */
     static public function question()
     {
-        return 'Totale dei bambini attivi 31/'.config('bs.year');
+        return 'Totale dei bambini attivi al 31/12/'.config('bs.year');
     }
 }

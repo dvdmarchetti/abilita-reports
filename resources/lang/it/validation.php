@@ -119,6 +119,7 @@ return [
     'uuid'                 => ':attribute deve essere un UUID valido.',
 
     'same_insensitive' => ':attribute e :other devono coincidere.',
+    'different_existing' => 'L\'identificativo in inserimento corrisponde ad record già inserito con informazioni differenti.',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,5 +177,9 @@ return [
         'time'                  => 'ora',
         'available'             => 'disponibile',
         'size'                  => 'dimensione',
+
+        'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'mesi frequenza servizio nell\'anno solare precedente',
+        'nazionalita' => 'nazionalità',
+        'rif_id_famiglia' => 'riferimento id famiglia',
     ],
 ];

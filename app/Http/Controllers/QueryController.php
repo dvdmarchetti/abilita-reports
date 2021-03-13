@@ -19,6 +19,9 @@ use App\Queries\ChildrenPerSourceChannel;
 use App\Queries\ChildrenPerYears;
 use App\Queries\ChildrenTotal;
 use App\Queries\ChildrenWithMoreThanOneService;
+use App\Queries\FamiliesPerService;
+use App\Queries\FamiliesPerServiceByMonths;
+use App\Queries\FamiliesWithMoreThanOneService;
 use App\Queries\ServiceCountPerChildren;
 use App\Service;
 use Illuminate\Support\Str;
@@ -30,7 +33,7 @@ class QueryController extends Controller
      *
      * @var array
      */
-    protected $queryList = [
+    protected $childrenQueryList = [
         ChildrenTotal::class,
         ChildrenActive::class,
         ChildrenPerService::class,
@@ -49,16 +52,36 @@ class QueryController extends Controller
         ServiceCountPerChildren::class,
     ];
 
+    protected $familiesQueryList = [
+        FamiliesPerServiceByMonths::class,
+        FamiliesWithMoreThanOneService::class,
+        FamiliesPerService::class,
+    ];
+
     public function __construct()
     {
-        $this->queries = collect($this->queryList)->keyBy(function ($class) {
+        $this->childrenQueries = $this->parseQueries($this->childrenQueryList);
+        $this->familiesQueries = $this->parseQueries($this->familiesQueryList);
+    }
+
+    /**
+     * Key queries by slug of class name;
+     *
+     * @param \Illuminate\Support\Collection|array $queries
+     * @return \Illuminate\Support\Collection
+     */
+    protected function parseQueries($queries)
+    {
+        return collect($queries)->keyBy(function ($class) {
             return (string) $this->slugify($class);
+        })->map(function ($class) {
+            return (new $class);
         });
     }
 
     /**
      * Display a listing of the resource.
-     *
+     *p
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -68,12 +91,12 @@ class QueryController extends Controller
         $familiesWithMoreThanOneChildCount = Family::withMoreThanOneChild()->count();
         $servicesCount = Service::count();
 
-        $queries = $this->queries->map(function ($class) {
-            return (new $class);
-        });
+        $childrenQueries = $this->childrenQueries;
+        $familiesQueries = $this->familiesQueries;
 
         return view('queries', compact(
-            'queries',
+            'familiesQueries',
+            'childrenQueries',
             'childrenCount',
             'familiesCount',
             'familiesWithMoreThanOneChildCount',

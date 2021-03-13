@@ -40,4 +40,14 @@ class Family extends Model
     {
         return $this->hasMany(Child::class);
     }
+
+    /**
+     * Retrieve the services associated with this family.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

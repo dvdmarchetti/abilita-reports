@@ -2,21 +2,18 @@
 
 namespace App\Imports\Sheets;
 
-use App\Child;
+use App\Family;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
-class ServicesImport extends CommonImport
+class FamilyServicesImport extends CommonImport
 {
-
     /**
      * The date fields that needs to be normalized
      *
      * @var array
      */
     protected $dates = [
-        'data_di_nascita',
         'data_inizio_frequenza_servizio_iscrizione_annuale',
         'data_fine_frequenza_servizio_dimissione_annuale',
     ];
@@ -50,24 +47,20 @@ class ServicesImport extends CommonImport
     public function rules(): array
     {
         return [
-            'id_bambino' => 'exists:children,id',
-            'rif_id_famiglia' => 'exists:families,id',
-            'sesso' => 'in:M,F',
-            'data_di_nascita' => 'date',
-
-            'area_diagnosi' => 'required|in:DISABILITÀ INTELLETTIVA,DISABILITÀ NEUROMOTORIA,DISTURBO SPETTRO AUTISTICO,SINDROMI GENETICHE,ALTRE PATOLOGIE',
-            'diagnosi_1' => 'required|string',
-            'diagnosi_2' => 'nullable|string',
-            'diagnosi_3' => 'nullable|string',
+            'rif_id_famiglia' => 'required',
 
             'anno_inizio_presa_in_carico_dal_servizio' => 'required|date',
             'anno_fine_presa_in_carico_dal_servizio' => 'nullable|present|date',
-            'motivo_fine_della_presa_in_carico' => 'nullable|in:DIMISSIONE,MOTIVI ECONOMICI,ALTRI MOTIVI,TRASFERIMENTO,VOLONTARIA',
 
             'data_inizio_frequenza_servizio_iscrizione_annuale' => 'required|date|before:today',
             'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',
             'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
-            'fonte_invio' => 'required|string|in:ATS,SERVIZI SOCIALI,SPONTANEA,UONPIA,CASE MANAGER,SCUOLA,SERVIZIO INTERNO ABILITÀ,ALTRO',
+
+            'grado_parentela' => 'required|string|in:Genitore,Fratello,nonno,n.a.',
+            'attivita' => 'sometimes|required|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
+            'attivita_2' => 'sometimes|present|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
+            'attivita_3' => 'sometimes|present|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
+            'attivita_4' => 'sometimes|present|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
         ];
     }
 
@@ -82,8 +75,6 @@ class ServicesImport extends CommonImport
         return parent::collection(
             $rows->reject(function ($row) {
                 return $this->isInvalidYearForImport($row['anno_inizio_presa_in_carico_dal_servizio']);
-            })->reject(function ($row) {
-                return Str::contains($row['note_diagnosi'], 'NOTA::: figlio');
             })
         );
     }
@@ -103,26 +94,23 @@ class ServicesImport extends CommonImport
      */
     protected function store($row)
     {
-        $child = Child::firstOrNew([
-            'id' => $row['id_bambino'],
-            'gender' => $row['sesso'],
-            'birth_date' => $row['data_di_nascita'],
-            'family_id' => $row['rif_id_famiglia'],
+
+        $family = Family::firstOrCreate([
+            'id' => $row['rif_id_famiglia']
         ]);
 
-        $child->services()->attach($this->spreadsheet->getService(), [
-            'diagnosis_area' => $row['area_diagnosi'],
-            'diagnosis_count' => $this->countDiagnosis($row),
-            // '' => $row['diagnosi_prevalente'],
-            // '' => $row['diagnosi_2'],
-            // '' => $row['diagnosi_3'],
+        $family->services()->attach($this->spreadsheet->getService(), [
             'first_appearance' => $row['anno_inizio_presa_in_carico_dal_servizio'],
             'end_of_charge' => $row['anno_fine_presa_in_carico_dal_servizio'],
-            'end_reason' => $row['motivo_fine_della_presa_in_carico'],
             'from' => $row['data_inizio_frequenza_servizio_iscrizione_annuale'],
             'to' => $row['data_fine_frequenza_servizio_dimissione_annuale'],
             'attendance_months' => $row['mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano'],
-            'source' => $row['fonte_invio'],
+
+            'relationship_degree' => $row['grado_parentela'] ?? null,
+            'activity_1' => $row['attivita'] ?? null,
+            'activity_2' => $row['attivita_2'] ?? null,
+            'activity_3' => $row['attivita_3'] ?? null,
+            'activity_4' => $row['attivita_4'] ?? null,
         ]);
     }
 

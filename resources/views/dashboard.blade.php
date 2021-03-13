@@ -90,11 +90,24 @@
 
 @section('content')
 <div class="flex flex-wrap">
-  <div class="w-full mb-12 lg:px-4">
-    <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-md rounded">
+  <div class="relative w-full mb-12 lg:px-4">
+    <div class="flex h-12 font-semibold text-sm uppercase">
+      @if ($currentRouteName === 'dashboard.children')
+      <a class="rounded-t flex-1 flex items-center justify-center text-pink-500 bg-white z-2">{{ __('Children') }}</a>
+      @else
+      <a class="rounded-t flex-1 flex items-center justify-center text-gray-100 transition duration-200 hover:text-white hover:bg-pink-400" href="{{ route('dashboard.children') }}">{{ __('Children') }}</a>
+      @endif
+
+      @if ($currentRouteName === 'dashboard.families')
+        <a class="rounded-t flex-1 flex items-center justify-center text-pink-500 bg-white">{{ __('Families') }}</a>
+      @else
+        <a class="rounded-t flex-1 flex items-center justify-center text-gray-100 transition duration-200 hover:text-white hover:bg-pink-400" href="{{ route('dashboard.families') }}">{{ __('Families') }}</a>
+      @endif
+    </div>
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-md z-3">
       <div class="rounded-t mb-0 px-4 border-0">
         <div class="flex flex-wrap h-12 items-center">
-          <div class="relative w-full max-w-full flex-grow flex-1 flex items-baseline justify-between">
+          <div class="w-full max-w-full flex-grow flex-1 flex items-baseline justify-between">
             <h3 class="font-semibold text-base text-gray-800">
               {{ __('Import errors') }} ({{ $logs->count() }})
             </h3>
@@ -114,11 +127,6 @@
               </form>
             </div>
           </div>
-          {{-- <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-            <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" type="button" style="transition:all .15s ease">
-            See all
-            </button>
-          </div> --}}
         </div>
       </div>
       <div class="block w-full overflow-x-auto -mt-px">

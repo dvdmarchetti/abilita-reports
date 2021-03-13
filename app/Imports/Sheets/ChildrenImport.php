@@ -93,7 +93,7 @@ class ChildrenImport extends CommonImport
                 'child' => $row['id_bambino'],
                 'errors' => [
                     [
-                        'message' => 'The provided id matches an existing child with different details.',
+                        'message' => __('validation.different_existing'),
                         'existing' => $child,
                         'new' => Child::make([
                             'id' => $row['id_bambino'],

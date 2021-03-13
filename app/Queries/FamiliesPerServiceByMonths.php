@@ -2,9 +2,9 @@
 
 namespace App\Queries;
 
-use App\Relations\ChildService;
+use App\Relations\FamilyService;
 
-class ChildrenPerServiceByMonths extends QueryObject
+class FamiliesPerServiceByMonths extends QueryObject
 {
     static protected $template = 'queries.per-service-by-months';
 
@@ -16,11 +16,11 @@ class ChildrenPerServiceByMonths extends QueryObject
      */
     public function results()
     {
-        return ChildService::query()
-            ->selectRaw('service_id, attendance_months, count(*) as bambini')
+        return FamilyService::query()
+            ->selectRaw('service_id, attendance_months, count(*) as famiglie')
             ->groupBy(['service_id', 'attendance_months'])
             ->get()
-            ->groupBy('service_id')->map->pluck('bambini', 'attendance_months');
+            ->groupBy('service_id')->map->pluck('famiglie', 'attendance_months');
     }
 
     /**

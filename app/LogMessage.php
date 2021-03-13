@@ -21,4 +21,26 @@ class LogMessage extends Model
     protected $casts = [
         'errors' => 'json',
     ];
+
+    /**
+     * Retrict query to children services only.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeForChildren($query)
+    {
+        return $query->whereNotIn('service', config('bs.import.family_services'));
+    }
+
+    /**
+     * Retrict query to family services only.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeForFamilies($query)
+    {
+        return $query->whereIn('service', config('bs.import.family_services'));
+    }
 }

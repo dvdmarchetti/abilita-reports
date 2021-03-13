@@ -17,9 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', 'dashboard');
-Route::get('dashboard', DashboardController::class)->name('dashboard');
-Route::post('imports', [ImportController::class, 'run'])->name('imports.run');
-Route::delete('imports', [ImportController::class, 'cleanup'])->name('imports.cleanup');
+// Route::redirect('/', route('dashboard.children'));
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::redirect('/', 'dashboard/children');
+    Route::get('children', [DashboardController::class, 'children'])->name('children');
+    Route::get('families', [DashboardController::class, 'families'])->name('families');
+});
+Route::prefix('imports')->name('imports.')->group(function () {
+    Route::redirect('/', 'dashboard/children');
+    Route::post('/', [ImportController::class, 'run'])->name('run');
+    Route::delete('/', [ImportController::class, 'cleanup'])->name('cleanup');
+});
 Route::resource('queries', QueryController::class)->only('index', 'show');
 Route::resource('logs', LogController::class)->only('index', 'show');

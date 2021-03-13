@@ -4,7 +4,7 @@ namespace App\Queries;
 
 use App\Service;
 
-class ChildrenPerService extends QueryObject
+class FamiliesPerService extends QueryObject
 {
     /**
      * Execute the query:
@@ -14,9 +14,9 @@ class ChildrenPerService extends QueryObject
      */
     public function results()
     {
-        return Service::forChildren()
-            ->withCount('children')
-            ->pluck('children_count', 'id');
+        return Service::forFamilies()
+            ->withCount('families')
+            ->pluck('families_count', 'id');
     }
 
     /**
@@ -26,6 +26,6 @@ class ChildrenPerService extends QueryObject
      */
     static public function question()
     {
-        return 'Conteggio di bambini per servizio';
+        return 'Conteggio di famiglie per servizio';
     }
 }

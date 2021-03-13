@@ -2,10 +2,10 @@
 
 namespace App\Imports;
 
-use App\Imports\Sheets\FamiliesImport;
+use App\Imports\Sheets\ChildrenImport;
 use App\Imports\Sheets\ServicesImport;
 
-class FamilyServiceImport extends ExcelWorksheetImport
+class ChildWorksheetImport extends ExcelWorksheetImport
 {
     /**
      * Process different worksheets with different importers.
@@ -15,8 +15,7 @@ class FamilyServiceImport extends ExcelWorksheetImport
     public function sheets(): array
     {
         return [
-            // 'ANAGRAFICA-B' => new ChildrenImport($this),
-            'ANAGRAFICA-F' => new FamiliesImport($this),
+            'ANAGRAFICA-B' => new ChildrenImport($this),
             'SERVIZIO' => new ServicesImport($this),
         ];
     }

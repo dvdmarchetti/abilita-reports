@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Child;
 use App\Family;
-use App\Imports\ChildServiceImport;
-use App\Imports\FamilyServiceImport;
+use App\Imports\ChildWorksheetImport;
+use App\Imports\FamilyWorksheetImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -26,17 +26,17 @@ class ImportController extends Controller
             Artisan::call('migrate:fresh --force -q');
 
             $this->processFolder('input/children', function ($service, $file) {
-                (new ChildServiceImport)->for($service)->import($file);
+                (new ChildWorksheetImport)->for($service)->import($file);
             });
 
-            // $this->processFolder('input/families', function ($service, $file) {
-            //     (new FamilyServiceImport)->for($service)->import($file);
-            // });
+            $this->processFolder('input/families', function ($service, $file) {
+                (new FamilyWorksheetImport)->for($service)->import($file);
+            });
 
             $this->removeExtraData();
         // });
 
-        return redirect()->route('dashboard');
+        return redirect()->back();
     }
 
     /**
@@ -84,7 +84,7 @@ class ImportController extends Controller
         // })->delete();
 
         // Child::whereDoesntHave('services')->delete();
-        Family::whereDoesntHave('children')->delete();
+        // Family::whereDoesntHave('children')->delete();
     }
 
     /**
@@ -96,6 +96,7 @@ class ImportController extends Controller
     public function cleanup(Request $request)
     {
         Artisan::call('migrate:fresh --force -q');
-        return redirect()->route('dashboard');
+
+        return redirect()->back();
     }
 }

@@ -14,7 +14,7 @@ class ChildrenActive extends QueryObject
      */
     public function results()
     {
-        return Child::active()->count();
+        return Child::count();
     }
 
     /**

@@ -119,6 +119,7 @@ return [
     'uuid' => 'The :attribute must be a valid UUID.',
 
     'same_insensitive' => 'Please, check for correct cases in :attribute and :other.',
+    'different_existing' => 'The provided id matches an existing child with different details',
 
     /*
     |--------------------------------------------------------------------------

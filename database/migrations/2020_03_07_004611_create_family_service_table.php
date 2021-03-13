@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChildServiceTable extends Migration
+class CreateFamilyServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,26 @@ class CreateChildServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('child_service', function (Blueprint $table) {
+        Schema::create('family_service', function (Blueprint $table) {
             $table->id();
 
-            $table->string('diagnosis_area');
-            $table->integer('diagnosis_count');
+            $table->datetime('end_of_charge')->nullable();
 
             $table->datetime('first_appearance');
-            $table->datetime('end_of_charge')->nullable();
-            $table->string('end_reason')->nullable();
-
             $table->datetime('from');
             $table->datetime('to')->nullable();
             $table->integer('attendance_months');
 
-            $table->string('source');
+            $table->string('relationship_degree')->nullable();
+            $table->string('activity_1')->nullable();
+            $table->string('activity_2')->nullable();
+            $table->string('activity_3')->nullable();
+            $table->string('activity_4')->nullable();
 
             $table->string('service_id');
             $table->foreign('service_id')->references('id')->on('services')->cascadeOnDelete();
-            $table->string('child_id');
-            $table->foreign('child_id')->references('id')->on('children')->cascadeOnDelete();
+            $table->string('family_id');
+            $table->foreign('family_id')->references('id')->on('families')->cascadeOnDelete();
 
             $table->timestamps();
         });
@@ -45,6 +45,6 @@ class CreateChildServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('child_service');
+        Schema::dropIfExists('family_service');
     }
 }

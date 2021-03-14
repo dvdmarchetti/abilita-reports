@@ -15,7 +15,7 @@
     </style>
   </head>
   <body class="text-gray-800 antialiased bg-gray-100">
-    <div class="relative bg-pink-500 md:pt-12 pb-24 pt-12">
+    <div class="relative bg-blue-400 md:pt-12 pb-24 pt-12">
       <div class="px-4 md:px-10 mx-auto w-full">
         <div>
           @yield('cards')

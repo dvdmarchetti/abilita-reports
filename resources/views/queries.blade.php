@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <x-card title="Children" :value="$childrenCount" icon="child" color="bg-green-500" />
+    <x-card title="Children" :value="$childrenCount" icon="child" color="bg-blue-400" />
 
     <div class="w-full md:w-1/3 md:px-4 md:mb-0 mb-4">
       <div class="relative flex p-4 h-full min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-md">
@@ -33,7 +33,7 @@
           </span>
         </div>
         <div class="relative w-auto pl-4 flex-initial">
-          <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500">
+          <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-400">
             <i class="fa fa-users"></i>
           </div>
         </div>

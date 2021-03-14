@@ -127,7 +127,7 @@
           </div>
         </div>
       </div>
-      <div class="block w-full -mt-px">
+      <div class="block w-full overflow-x-auto -mt-px">
         <!-- Projects table -->
         <table class="items-center table-auto w-full bg-transparent border-collapse">
           <thead>

@@ -50,6 +50,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        $this->registerErrorViewPaths();
+
+        if ($exception instanceof \ErrorException
+         && $exception->getMessage() === 'ZipArchive::getFromName(): Invalid or uninitialized Zip object') {
+            return response()->view('errors.excel', [], 412);
+        }
+
         return parent::render($request, $exception);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Imports\Sheets;
 use App\Family;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Psr\Log\LogLevel;
 
 class FamilyServicesImport extends CommonImport
 {
@@ -125,5 +126,20 @@ class FamilyServicesImport extends CommonImport
         return $row->only(['diagnosi_1', 'diagnosi_2', 'diagnosi_3'])->reject(function ($diagnosi) {
             return empty($diagnosi);
         })->count();
+    }
+
+    /**
+     * Handle validation failures
+     *
+     * @param Failure[] $failures
+     */
+    public function onFailure($validator)
+    {
+        $this->fail([
+            'level' => LogLevel::ERROR,
+            'child' => $validator->attributes()['id_bambino'],
+            'family' => $validator->attributes()['rif_id_famiglia'] ?? null,
+            'errors' => $validator->errors()->all(),
+        ]);
     }
 }

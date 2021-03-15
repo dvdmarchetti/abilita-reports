@@ -18,7 +18,8 @@
       <img class="flex-1-auto" src="{{ asset('/res/logo.jpg') }}" width="250">
     </div>
 
-    <div class="relative bg-blue-400 md:pt-12 pb-24 pt-12">
+    <div class="relative bg-blue-400 md:pt-8 pb-24 pt-8">
+      <h2 class="block pb-8 text-white text-center text-3xl font-semibold">Bilancio Sociale {{ config('bs.year') }}</h2>
       <div class="px-4 md:px-10 mx-auto w-full">
         <div>
           @yield('cards')

@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="p-4 pt-0">
-          @foreach (['anagrafica-b', 'servizi'] as $spreadsheet)
+          @foreach (['anagrafica-b', 'servizio'] as $spreadsheet)
             @if (\Arr::get(request(), 'filter.spreadsheet') === $spreadsheet)
               <a href="{{ request()->fullUrlWithQuery(['filter' => array_merge(request()->query('filter', []), [ 'spreadsheet' => $spreadsheet ])]) }}" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-800 bg-blue-200 last:mr-0 mr-1 mt-1">{{ $spreadsheet }}</a>
             @else
@@ -138,9 +138,15 @@
               <th class="px-4 align-middle border border-solid border-gray-100 border-l-0 border-r-0 font-semibold">
                 {{ __('Spreadsheet') }}
               </th>
-              <th class="px-4 align-middle border border-solid border-gray-100 border-l-0 border-r-0 font-semibold">
-                {{ __('Child') }}
-              </th>
+              @if ($currentRouteName === 'dashboard.families')
+                <th class="px-4 align-middle border border-solid border-gray-100 border-l-0 border-r-0 font-semibold">
+                  {{ __('Family') }}
+                </th>
+              @else
+                <th class="px-4 align-middle border border-solid border-gray-100 border-l-0 border-r-0 font-semibold">
+                  {{ __('Child') }}
+                </th>
+              @endif
               <th class="hidden lg:table-cell px-4 align-middle border border-solid border-gray-100 border-l-0 border-r-0 font-semibold">
                 {{ __('Errors') }}
               </th>
@@ -159,9 +165,15 @@
                 <td class="border-t-0 align-top border-l-0 border-r-0 text-sm p-4 pb-0 lg:pb-4">
                   {{ $log->spreadsheet }}
                 </td>
-                <td class="border-t-0 align-top border-l-0 border-r-0 text-sm p-4 pb-0 lg:pb-4">
-                  {{ $log->child }}
-                </td>
+                @if ($currentRouteName === 'dashboard.families')
+                  <td class="border-t-0 align-top border-l-0 border-r-0 text-sm p-4 pb-0 lg:pb-4">
+                    {{ $log->family }}
+                  </td>
+                @else
+                  <td class="border-t-0 align-top border-l-0 border-r-0 text-sm p-4 pb-0 lg:pb-4">
+                    {{ $log->child }}
+                  </td>
+                @endif
                 <td class="hidden lg:table-cell border-t-0 border-l-0 border-r-0 text-sm p-4 pb-0 lg:pb-4">
                   <ul class="list-disc">
                     @foreach ($log->errors as $error)

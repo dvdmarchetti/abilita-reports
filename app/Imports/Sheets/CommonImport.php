@@ -123,6 +123,7 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
         $this->fail([
             'level' => LogLevel::ERROR,
             'child' => $validator->attributes()['id_bambino'],
+            'family' => $validator->attributes()['family_id'] ?? null,
             'errors' => $validator->errors()->all(),
         ]);
     }

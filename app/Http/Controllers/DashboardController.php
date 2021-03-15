@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $currentRouteName = Route::currentRouteName();
         $services = Service::forFamilies()->get();
         $logs = QueryBuilder::for(LogMessage::class)
-            ->allowedFilters(['service', 'spreadsheet', 'child'])
+            ->allowedFilters(['service', 'spreadsheet'])
             ->forFamilies()
             ->get();
 

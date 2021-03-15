@@ -19,6 +19,7 @@ class CreateLogMessagesTable extends Migration
             $table->string('level');
             $table->string('spreadsheet');
             $table->string('child');
+            $table->string('family')->nullable();
             $table->string('service');
             $table->json('errors');
 

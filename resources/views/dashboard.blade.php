@@ -95,13 +95,13 @@
       @if ($currentRouteName === 'dashboard.children')
       <a class="rounded-t flex-1 flex items-center justify-center text-blue-400 bg-white z-2">{{ __('Children') }}</a>
       @else
-      <a class="rounded-t flex-1 flex items-center justify-center text-gray-100 transition duration-200 hover:text-white hover:bg-blue-500" href="{{ route('dashboard.children') }}">{{ __('Children') }}</a>
+      <a class="rounded-t flex-1 flex items-center justify-center text-gray-100 transition duration-200 hover:text-white hover:bg-blue-300 bg-blue-500" href="{{ route('dashboard.children') }}">{{ __('Children') }}</a>
       @endif
 
       @if ($currentRouteName === 'dashboard.families')
         <a class="rounded-t flex-1 flex items-center justify-center text-blue-400 bg-white">{{ __('Families') }}</a>
       @else
-        <a class="rounded-t flex-1 flex items-center justify-center text-gray-100 transition duration-200 hover:text-white hover:bg-blue-500" href="{{ route('dashboard.families') }}">{{ __('Families') }}</a>
+        <a class="rounded-t flex-1 flex items-center justify-center text-gray-100 transition duration-200 hover:text-white hover:bg-blue-300 bg-blue-500" href="{{ route('dashboard.families') }}">{{ __('Families') }}</a>
       @endif
     </div>
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-md z-3">

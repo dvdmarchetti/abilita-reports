@@ -17,7 +17,6 @@ use App\Queries\ChildrenPerService;
 use App\Queries\ChildrenPerServiceByMonths;
 use App\Queries\ChildrenPerSourceChannel;
 use App\Queries\ChildrenPerYears;
-use App\Queries\ChildrenTotal;
 use App\Queries\ChildrenWithMoreThanOneService;
 use App\Queries\FamiliesPerService;
 use App\Queries\FamiliesPerServiceByMonths;
@@ -34,7 +33,6 @@ class QueryController extends Controller
      * @var array
      */
     protected $childrenQueryList = [
-        ChildrenTotal::class,
         ChildrenActive::class,
         ChildrenPerService::class,
         ChildrenPerGender::class,

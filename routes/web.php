@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::redirect('/', route('dashboard.children'));
+Route::redirect('/', 'dashboard');
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
     Route::redirect('/', 'dashboard/children');
     Route::get('children', [DashboardController::class, 'children'])->name('children');

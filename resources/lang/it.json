@@ -12,6 +12,7 @@
     "Filter": "Filtra",
     "Import errors": "Errori di importazione",
     "Import phase": "Fase di importazione",
+    "Loading...": "Caricamento dati...",
     "No import error has been found matching the selected criteria.": "Nessun dato da visualizzare in base ai filtri selezionati.",
     "Please, make sure all the input files are not open in Excel.": "Assicurati che tutti i file da analizzare non siano aperti in Excel.",
     "Question": "Interrogazione",

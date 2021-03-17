@@ -56,8 +56,8 @@ class QueryController extends Controller
         FamiliesPerServiceByMonths::class,
         FamiliesWithMoreThanOneService::class,
         FamiliesPerService::class,
-        FamiliesByActivity::class,
         FamiliesWithMoreThanOneActivity::class,
+        FamiliesByActivity::class,
     ];
 
     public function __construct()

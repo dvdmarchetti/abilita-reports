@@ -13,7 +13,7 @@
     }
     </style>
   </head>
-  <body class="text-gray-800 antialiased bg-gray-100">
+  <body class="relative text-gray-800 antialiased bg-gray-100">
     <div class="flex p-4 bg-white justify-center">
       <img class="flex-1-auto" src="{{ asset('/res/logo.jpg') }}" width="250">
     </div>
@@ -30,5 +30,7 @@
     <div class="px-4 md:px-10 mx-auto w-full -m-24">
       @yield('content')
     </div>
+
+    @stack('custom-scripts')
   </body>
 </html>

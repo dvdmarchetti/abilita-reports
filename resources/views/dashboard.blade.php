@@ -120,7 +120,7 @@
             </form>
             <form class="inline-block" action="{{ route('imports.run') }}" method="POST">
               @csrf
-              <button class="inline-block px-3 py-1 bg-blue-200 text-blue-800 rounded-full font-semibold text-sm hover:underline">
+              <button id="run-import" class="inline-block px-3 py-1 bg-blue-200 text-blue-800 rounded-full font-semibold text-sm hover:underline">
                 {{ __('Run import') }}
               </button>
             </form>
@@ -261,3 +261,15 @@
   </div>
 </div>
 @endsection
+
+@push('custom-scripts')
+  <div id="overlay" class="hidden fixed z-10 inset-0 bg-blue-400 bg-opacity-75 h-screen w-screen flex items-center justify-center">
+    <img src="{{ asset('res/loader.svg') }}" width="48" />
+    <h2 class="text-white text-3xl px-4 font-semibold">{{ __('Loading...') }}</h2>
+  </div>
+  <script>
+    document.getElementById('run-import').addEventListener('click', function () {
+      document.getElementById('overlay').classList.remove('hidden');
+    });
+  </script>
+@endpush

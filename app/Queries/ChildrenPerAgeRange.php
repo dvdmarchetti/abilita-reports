@@ -7,8 +7,7 @@ use App\Child;
 class ChildrenPerAgeRange extends QueryObject
 {
     /**
-     * Execute the query:
-     *  4) Quanti bambini di che età? Da 0 mesi ai 12 anni
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

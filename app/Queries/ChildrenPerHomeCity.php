@@ -7,8 +7,7 @@ use App\Child;
 class ChildrenPerHomeCity extends QueryObject
 {
     /**
-     * Execute the query:
-     *  6) Quanti residenti a Milano? Quanti fuori Milano?
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

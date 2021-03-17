@@ -7,8 +7,7 @@ use App\Relations\ChildService;
 class ChildrenPerSourceChannel extends QueryObject
 {
     /**
-     * Execute the query:
-     *  12) Quanti bambini per ogni fonte di invio
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

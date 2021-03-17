@@ -7,8 +7,7 @@ use App\Relations\ChildService;
 class ChildrenPerEndReason extends QueryObject
 {
     /**
-     * Execute the query:
-     *  11) Quanti bambini per ogni motivo del temine della presa in carico
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

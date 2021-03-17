@@ -8,8 +8,7 @@ use Carbon\Carbon;
 class ChildrenPerYears extends QueryObject
 {
     /**
-     * Execute the query:
-     *  9) Quanti bambini per quanti anni sono in carico a L’abilità?
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

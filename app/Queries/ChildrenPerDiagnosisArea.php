@@ -7,8 +7,7 @@ use App\Relations\ChildService;
 class ChildrenPerDiagnosisArea extends QueryObject
 {
     /**
-     * Execute the query:
-     *  7) Quanti bambini per (area di) diagnosi
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

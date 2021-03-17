@@ -7,8 +7,7 @@ use App\Family;
 class FamiliesWithMoreThanOneService extends QueryObject
 {
     /**
-     * Execute the query:
-     *  13) Quanti bambini usufruiscono di almeno servizio?
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */
@@ -30,6 +29,6 @@ class FamiliesWithMoreThanOneService extends QueryObject
      */
     static public function question()
     {
-        return 'Quante famiglie usufruiscono di almeno servizio?';
+        return 'Quante famiglie usufruiscono di almeno servizio in area famiglia?';
     }
 }

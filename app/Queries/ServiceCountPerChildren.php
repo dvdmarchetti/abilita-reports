@@ -7,8 +7,7 @@ use App\Child;
 class ServiceCountPerChildren extends QueryObject
 {
     /**
-     * Execute the query:
-     *  14) Conteggio di bambini per numero di servizi
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

@@ -9,8 +9,7 @@ class FamiliesPerServiceByMonths extends QueryObject
     static protected $template = 'queries.per-service-by-months';
 
     /**
-     * Execute the query:
-     *  10) Quanti bambini per quanti mesi hanno frequentato il servizio nel 2019? Da 1 a 12 mesi
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */
@@ -30,6 +29,6 @@ class FamiliesPerServiceByMonths extends QueryObject
      */
     static public function question()
     {
-        return 'Quanti bambini per quanti mesi hanno frequentato il servizio nel '. config('bs.year') .'? Da 1 a 12 mesi';
+        return 'Quante famiglie per quanti mesi hanno usufruito dei servizi area famiglia FAM/CM/SOL nel '. config('bs.year') .'?<br>Da 1 a 12 mesi';
     }
 }

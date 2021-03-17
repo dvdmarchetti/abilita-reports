@@ -7,8 +7,7 @@ use App\Child;
 class ChildrenPerNationality extends QueryObject
 {
     /**
-     * Execute the query:
-     *  5) Quanti per nazionalità? Italiana o Straniera
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Relations\FamilyService;
 use Illuminate\Database\Eloquent\Model;
 
 class Family extends Model
@@ -48,6 +49,7 @@ class Family extends Model
      */
     public function services()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class)
+            ->using(FamilyService::class);
     }
 }

@@ -7,8 +7,7 @@ use App\Child;
 class ChildrenPerGender extends QueryObject
 {
     /**
-     * Execute the query:
-     *  3) Quanti maschi/quante femmine
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

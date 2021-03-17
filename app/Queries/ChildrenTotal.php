@@ -7,8 +7,7 @@ use App\Child;
 class ChildrenTotal extends QueryObject
 {
     /**
-     * Execute the query:
-     *  1) Totale dei bambini iscritti nel 2019
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

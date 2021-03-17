@@ -7,8 +7,7 @@ use App\Child;
 class ChildrenWithMoreThanOneService extends QueryObject
 {
     /**
-     * Execute the query:
-     *  13) Quanti bambini usufruiscono di almeno servizio?
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

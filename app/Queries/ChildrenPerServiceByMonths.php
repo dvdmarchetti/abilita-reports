@@ -9,8 +9,7 @@ class ChildrenPerServiceByMonths extends QueryObject
     static protected $template = 'queries.per-service-by-months';
 
     /**
-     * Execute the query:
-     *  10) Quanti bambini per quanti mesi hanno frequentato il servizio nel 2019? Da 1 a 12 mesi
+     * Execute the query
      *
      * @return \Illuminate\Support\Collection
      */

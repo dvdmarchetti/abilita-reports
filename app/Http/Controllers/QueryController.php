@@ -18,8 +18,10 @@ use App\Queries\ChildrenPerServiceByMonths;
 use App\Queries\ChildrenPerSourceChannel;
 use App\Queries\ChildrenPerYears;
 use App\Queries\ChildrenWithMoreThanOneService;
+use App\Queries\FamiliesByActivity;
 use App\Queries\FamiliesPerService;
 use App\Queries\FamiliesPerServiceByMonths;
+use App\Queries\FamiliesWithMoreThanOneActivity;
 use App\Queries\FamiliesWithMoreThanOneService;
 use App\Queries\ServiceCountPerChildren;
 use App\Service;
@@ -54,6 +56,8 @@ class QueryController extends Controller
         FamiliesPerServiceByMonths::class,
         FamiliesWithMoreThanOneService::class,
         FamiliesPerService::class,
+        FamiliesByActivity::class,
+        FamiliesWithMoreThanOneActivity::class,
     ];
 
     public function __construct()

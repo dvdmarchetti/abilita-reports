@@ -50,6 +50,12 @@ class Family extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class)
-            ->using(FamilyService::class);
+            ->using(FamilyService::class)
+            ->withPivot([
+                'activity_1',
+                'activity_2',
+                'activity_3',
+                'activity_4',
+            ]);
     }
 }

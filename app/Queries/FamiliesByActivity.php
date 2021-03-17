@@ -48,6 +48,6 @@ class FamiliesByActivity extends QueryObject
      */
     static public function question()
     {
-        return 'Famiglie divise per attività in FAM';
+        return 'Famiglie divise per attività in servizio FAM';
     }
 }

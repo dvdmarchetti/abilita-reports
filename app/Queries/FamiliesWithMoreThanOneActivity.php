@@ -45,6 +45,6 @@ class FamiliesWithMoreThanOneActivity extends QueryObject
      */
     static public function question()
     {
-        return 'Quante famiglie usufruiscono di almeno un\'attività in area famiglia?';
+        return 'Famiglie con più di 1 attività in servizio FAM?';
     }
 }

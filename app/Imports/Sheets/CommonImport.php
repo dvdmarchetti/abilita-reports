@@ -60,7 +60,7 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
      * Process excel rows.
      *
      * @param Collection $rows
-     * @return void
+     * @return \Illuminate\Support\Collection
      */
     public function collection(Collection $rows)
     {
@@ -70,11 +70,24 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
             // echo '<pre>'.json_encode($row, JSON_PRETTY_PRINT);
             // exit();
             return Str::startsWith($row['id_bambino'], config('bs.import.rejected_ids'));
+        })->map(function ($row) {
+            return $this->transform($row);
         })->filter(function ($row) {
             return $this->validate($row);
         })->each(function ($row) {
             $this->store($row);
         });
+    }
+
+    /**
+     * Allow dataset modifications from subclasses
+     *
+     * @param Collection $row
+     * @return Collection
+     */
+    protected function transform($row)
+    {
+        return $row;
     }
 
     /**

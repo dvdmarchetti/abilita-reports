@@ -33,8 +33,8 @@ class FamiliesWithMoreThanOneActivity extends QueryObject
             });
 
         return collect([
-            'SINGOLA ATTIVITÀ' => $below->count(),
-            'ALMENO DUE ATTIVITÀ' => $above->count(),
+            'SINGOLA ATTIVITÀ' => $below->dump(),
+            'ALMENO DUE ATTIVITÀ' => $above->dd(),
         ]);
     }
 

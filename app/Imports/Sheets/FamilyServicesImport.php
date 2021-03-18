@@ -5,6 +5,7 @@ namespace App\Imports\Sheets;
 use App\Family;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Psr\Log\LogLevel;
 
 class FamilyServicesImport extends CommonImport
@@ -41,12 +42,35 @@ class FamilyServicesImport extends CommonImport
     }
 
     /**
+     * Allow dataset modifications from subclasses
+     *
+     * @param Collection $row
+     * @return Collection
+     */
+    protected function transform($row)
+    {
+        return $row->map(function ($value, $column) {
+            if (in_array($column, [ 'attivita', 'attivita_2', 'attivita_3', 'attivita_4' ]) && in_array($value, ['NO', 'n.a.'])) {
+                return null;
+            }
+
+            return $value;
+        });
+    }
+
+    /**
      * Define column validation rules.
      *
      * @return array
      */
     public function rules(): array
     {
+        $baseActivityRules = [
+            'sometimes',
+            'nullable',
+            'in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare,n.a.',
+        ];
+
         return [
             'rif_id_famiglia' => 'required',
 
@@ -58,10 +82,10 @@ class FamilyServicesImport extends CommonImport
             'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
 
             'grado_parentela' => 'sometimes|required|string|in:Genitore,Fratello,nonno,n.a.',
-            'attivita' => 'sometimes|required|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
-            'attivita_2' => 'sometimes|present|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
-            'attivita_3' => 'sometimes|present|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
-            'attivita_4' => 'sometimes|present|in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare',
+            'attivita'   => array_merge($baseActivityRules, [ 'required', 'different:attivita_2,attivita_3,attivita_4' ]),
+            'attivita_2' => array_merge($baseActivityRules, [ 'present', 'different:attivita,attivita_3,attivita_4' ]),
+            'attivita_3' => array_merge($baseActivityRules, [ 'present', 'different:attivita_2,attivita,attivita_4' ]),
+            'attivita_4' => array_merge($baseActivityRules, [ 'present', 'different:attivita_2,attivita_3,attivita' ]),
         ];
     }
 

@@ -131,7 +131,7 @@
         <!-- Projects table -->
         <table class="items-center table-auto w-full bg-transparent border-collapse">
           <thead>
-            <tr class="h-12 text-gray-600 text-xs uppercase text-left bg-gray-50">
+            <tr class="h-12 text-gray-600 text-xs uppercase text-left bg-gray-100">
               <th class="px-4 align-middle border border-solid border-gray-100 border-l-0 border-r-0 font-semibold">
                 {{ __('Service') }}
               </th>
@@ -157,7 +157,7 @@
               @if ($loop->index%2 == 0)
                 <tr>
               @else
-                <tr class="bg-gray-50">
+                <tr class="bg-gray-100">
               @endif
                 <th class="border-t-0 align-top border-l-0 border-r-0 text-sm p-4 pb-0 lg:pb-4 text-left">
                   {{ $log->service }}

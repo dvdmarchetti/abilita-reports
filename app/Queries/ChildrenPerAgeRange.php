@@ -28,6 +28,6 @@ class ChildrenPerAgeRange extends QueryObject
      */
     static public function question()
     {
-        return 'Quanti bambini di che età? Da 0 mesi ai 12 anni divisi in fasce di un anno.';
+        return 'Quanti bambini di che età? Da 0 mesi ai 12 anni (divisi in fasce di un anno).';
     }
 }

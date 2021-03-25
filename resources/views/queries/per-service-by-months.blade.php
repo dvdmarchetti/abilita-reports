@@ -13,7 +13,7 @@
       <tr>
         <th class="p-2 text-right">{{ $service }}</th>
         @for ($i = 1; $i <= 12; $i++)
-          <td class="p-2 border text-right">{{ $months->get($i, '-') }}</td>
+          <td class="p-2 border border-gray-400 text-right">{{ $months->get($i, '-') }}</td>
         @endfor
       </tr>
     @endforeach

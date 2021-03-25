@@ -12,17 +12,17 @@
     <table class="items-center table-auto w-full bg-transparent border-collapse">
       <thead>
         <tr class="h-12">
-          <th class="px-4 bg-gray-50 text-gray-600 align-middle border border-solid border-gray-100 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+          <th class="px-4 bg-gray-200 text-gray-600 align-middle border border-solid border-gray-100 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
             {{ __('Question') }}
           </th>
-          <th class="md:table-cell hidden px-4 bg-gray-50 text-gray-600 align-middle border border-solid border-gray-100 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+          <th class="md:table-cell hidden px-4 bg-gray-200 text-gray-600 align-middle border border-solid border-gray-100 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
             {{ __('Result') }}
           </th>
         </tr>
       </thead>
       <tbody>
         @forelse($queries as $key => $query)
-          <tr class="odd:bg-white bg-gray-50 w-full md:table-row table">
+          <tr class="odd:bg-white bg-gray-200 w-full md:table-row table">
             <td class="border-t-0 border-l-0 border-r-0 md:table-cell table-row align-top">
               <div class="sm:block table-cell w-full px-4 align-top border-l-0 border-r-0 text-sm p-4 md:py-4 pb-1 py-2">
                 <p class="text-xs font-semibold text-gray-500">{{ $key }}</p>

@@ -16,6 +16,7 @@ class ChildrenPerAgeRange extends QueryObject
         return Child::query()
             ->selectRaw('TIMESTAMPDIFF(YEAR, birth_date, CURDATE()) AS age, COUNT(*) as bambini')
             ->groupBy('age')
+            ->orderBy('age')
             ->get()
             ->pluck('bambini', 'age');
     }

@@ -50,7 +50,7 @@ class FamilyServicesImport extends CommonImport
     protected function transform($row)
     {
         return $row->map(function ($value, $column) {
-            if (in_array($column, [ 'attivita', 'attivita_2', 'attivita_3', 'attivita_4' ]) && in_array($value, ['NO', 'n.a.'])) {
+            if (in_array($column, [ 'attivita', 'attivita_2', 'attivita_3', 'attivita_4' ]) && in_array($value, ['NO', 'n.a.', 'Verificare'])) {
                 return null;
             }
 
@@ -68,7 +68,7 @@ class FamilyServicesImport extends CommonImport
         $baseActivityRules = [
             'sometimes',
             'nullable',
-            'in:Individuale,Genitori-IND,Genitori-COPPIA,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare,n.a.',
+            'in:Individuale,Genitori-IND,Genitori-COPPIA,Genitori-GRUPPO AUTISMO,Genitori-GRUPPO DISABILITA VARIE,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare,n.a.',
         ];
 
         return [
@@ -81,7 +81,7 @@ class FamilyServicesImport extends CommonImport
             'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',
             'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
 
-            'grado_parentela' => 'sometimes|required|string|in:Genitore,Fratello,nonno,n.a.',
+            'grado_parentela' => 'sometimes|required|string|in:Genitore,Fratello,Nonno,Adulto NO B,n.a.,VERIFICARE',
             'attivita'   => array_merge($baseActivityRules, [ 'required', 'different:attivita_2,attivita_3,attivita_4' ]),
             'attivita_2' => array_merge($baseActivityRules, [ 'present', 'different:attivita,attivita_3,attivita_4' ]),
             'attivita_3' => array_merge($baseActivityRules, [ 'present', 'different:attivita_2,attivita,attivita_4' ]),

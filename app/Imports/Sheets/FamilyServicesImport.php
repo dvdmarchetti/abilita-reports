@@ -68,7 +68,7 @@ class FamilyServicesImport extends CommonImport
         $baseActivityRules = [
             'sometimes',
             'nullable',
-            'in:Individuale,Genitori-IND,Genitori-COPPIA,Genitori-GRUPPO AUTISMO,Genitori-GRUPPO DISABILITA VARIE,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare,n.a.',
+            'in:Individuale,Genitori-IND,Genitori-COPPIA,Genitori-GRUPPO AUTISMO,Genitori-GRUPPO DISABILITÀ VARIE,Gruppo Fratelli,Gruppo Nonni,NO,Altro,Verificare,n.a.',
         ];
 
         return [

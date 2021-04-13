@@ -24,6 +24,7 @@ use App\Queries\FamiliesPerServiceByMonths;
 use App\Queries\FamiliesWithMoreThanOneActivity;
 use App\Queries\FamiliesWithMoreThanOneService;
 use App\Queries\ServiceCountPerChildren;
+use App\Relations\FamilyService;
 use App\Service;
 use Illuminate\Support\Str;
 
@@ -89,8 +90,7 @@ class QueryController extends Controller
     public function index()
     {
         $childrenCount = Child::count();
-        $familiesCount = Family::count();
-        $familiesWithMoreThanOneChildCount = Family::withMoreThanOneChild()->count();
+        $familiesCount = Family::has('services')->count();
         $servicesCount = Service::count();
 
         $childrenQueries = $this->childrenQueries;
@@ -101,7 +101,6 @@ class QueryController extends Controller
             'childrenQueries',
             'childrenCount',
             'familiesCount',
-            'familiesWithMoreThanOneChildCount',
             'servicesCount',
         ));
     }

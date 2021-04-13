@@ -29,7 +29,6 @@
           <h5 class="text-gray-500 uppercase font-semibold text-xs tracking-wide">{{ __('Families') }}</h5>
           <span class="font-semibold text-4xl text-gray-800">
             {{ $familiesCount }}
-            <span class="block text-xs text-gray-600">({{ __(':count with more than a child', ['count' => $familiesWithMoreThanOneChildCount]) }})</span>
           </span>
         </div>
         <div class="relative w-auto pl-4 flex-initial">

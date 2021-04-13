@@ -42,6 +42,17 @@ class FamilyServicesImport extends CommonImport
     }
 
     /**
+     * Reject rows if condition is satisfied
+     *
+     * @param Collection $row
+     * @return boolean
+     */
+    protected function reject($row)
+    {
+        // return Str::startsWith($row['id_bambino'], config('bs.import.rejected_ids'));
+    }
+
+    /**
      * Allow dataset modifications from subclasses
      *
      * @param Collection $row

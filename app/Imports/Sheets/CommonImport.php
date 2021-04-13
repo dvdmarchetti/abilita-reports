@@ -69,7 +69,7 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
         })->reject(function ($row) {
             // echo '<pre>'.json_encode($row, JSON_PRETTY_PRINT);
             // exit();
-            return Str::startsWith($row['id_bambino'], config('bs.import.rejected_ids'));
+            return $this->reject($row);
         })->map(function ($row) {
             return $this->transform($row);
         })->filter(function ($row) {
@@ -77,6 +77,17 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
         })->each(function ($row) {
             $this->store($row);
         });
+    }
+
+    /**
+     * Reject rows if condition is satisfied
+     *
+     * @param Collection $row
+     * @return boolean
+     */
+    protected function reject($row)
+    {
+        return Str::startsWith($row['id_bambino'], config('bs.import.rejected_ids'));
     }
 
     /**

@@ -6,6 +6,8 @@ use App\Child;
 use App\Family;
 use App\Imports\ChildWorksheetImport;
 use App\Imports\FamilyWorksheetImport;
+use App\Relations\ChildService;
+use App\Relations\FamilyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -63,28 +65,22 @@ class ImportController extends Controller
 
     protected function removeExtraData()
     {
-        Child::whereDoesntHave('services', function ($query) {
-            $query->whereYear('first_appearance', 9999)
-                ->orWhere(function ($query) {
-                    // first_appearance <= curr_year and (end_of_charge <= curr_year or end_of_charge IS NULL)
-                    $query->whereYear('first_appearance', '<=', config('bs.year'))
-                        ->where(function ($query) {
-                            $query->whereYear('end_of_charge', '=', config('bs.year'))
-                                ->orWhereNull('end_of_charge');
-                        });
-                });
-        })->delete();
+        $relations = collect([ChildService::query(), FamilyService::query()]);
 
-        // Child::whereHas('services', function ($query) {
-        //     $query->whereYear('end_of_charge', '<', config('bs.year'))
-        //         ->orWhere(function ($query) {
-        //             $query->whereYear('first_appearance', '<', 9999)
-        //                 ->whereYear('first_appearance', '>', config('bs.year'));
-        //         });
-        // })->delete();
+        $relations->each(function ($relation) {
+            $relation->where(function($query) {
+                $query->whereYear('first_appearance', '!=', 9999)
+                    ->whereYear('first_appearance', '>', config('bs.year'));
+            })
+            ->orWhere(function ($query) {
+                $query->whereNotNull('end_of_charge')
+                    ->whereYear('end_of_charge', '<', config('bs.year'));
+            })
+            ->delete();
+        });
 
-        // Child::whereDoesntHave('services')->delete();
-        // Family::whereDoesntHave('children')->delete();
+        Child::doesntHave('services')->delete();
+        Family::doesntHave('services')->doesntHave('children')->delete();
     }
 
     /**

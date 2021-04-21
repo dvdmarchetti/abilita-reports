@@ -49,7 +49,7 @@ class FamilyServicesImport extends CommonImport
      */
     protected function reject($row)
     {
-        // return Str::startsWith($row['id_bambino'], config('bs.import.rejected_ids'));
+        return Str::startsWith($row['rif_id_famiglia'], 'FN');
     }
 
     /**
@@ -153,7 +153,7 @@ class FamilyServicesImport extends CommonImport
     /**
      * Get the max diagnosis count for the current service-child pair.
      *
-     * @param array $row
+     * @param \Illuminate\Support\Collection $row
      * @return integer
      */
     protected function countDiagnosis($row)

@@ -26,7 +26,7 @@ use App\Queries\FamiliesWithMoreThanOneActivity;
 use App\Queries\FamiliesWithMoreThanOneService;
 use App\Queries\FamiliesWithoutActiveChildren;
 use App\Queries\ServiceCountPerChildren;
-use App\Relations\FamilyService;
+use App\Queries\ServiceCountPerFamiliesWithChildren;
 use App\Service;
 use Illuminate\Support\Str;
 
@@ -53,6 +53,7 @@ class QueryController extends Controller
         ChildrenPerSourceChannel::class,
         ChildrenWithMoreThanOneService::class,
         ServiceCountPerChildren::class,
+        ServiceCountPerFamiliesWithChildren::class,
     ];
 
     protected $familiesQueryList = [

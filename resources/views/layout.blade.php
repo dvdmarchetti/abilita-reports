@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#4f89d0" />
     <script src="https://kit.fontawesome.com/fd0c6609cb.js" crossorigin="anonymous"></script>
     <link href="{{ asset('styles/tailwind.min.css') }}" rel="stylesheet">
-    <title>Bilancio Sociale {{ config('bs.year') }}</title>
+    <title>Bilancio Sociale {{ config('bs.year') + 1 }}</title>
     <style>
     .odd\:bg-white:nth-child(odd) {
       background-color: white;
@@ -19,7 +19,7 @@
     </div>
 
     <div class="relative bg-blue-400 md:pt-8 pb-24 pt-8">
-      <h2 class="block pb-8 text-white text-center text-3xl font-semibold">Bilancio Sociale {{ config('bs.year') }}</h2>
+      <h2 class="block pb-8 text-white text-center text-3xl font-semibold">Bilancio Sociale {{ config('bs.year') + 1 }}</h2>
       <div class="px-4 md:px-10 mx-auto w-full">
         <div>
           @yield('cards')

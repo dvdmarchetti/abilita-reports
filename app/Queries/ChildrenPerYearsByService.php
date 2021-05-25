@@ -2,7 +2,6 @@
 
 namespace App\Queries;
 
-use App\Child;
 use App\Relations\ChildService;
 use Carbon\Carbon;
 

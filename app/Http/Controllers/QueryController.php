@@ -17,6 +17,7 @@ use App\Queries\ChildrenPerService;
 use App\Queries\ChildrenPerServiceByMonths;
 use App\Queries\ChildrenPerSourceChannel;
 use App\Queries\ChildrenPerYears;
+use App\Queries\ChildrenPerYearsByService;
 use App\Queries\ChildrenWithMoreThanOneService;
 use App\Queries\FamiliesByActivity;
 use App\Queries\FamiliesPerService;
@@ -48,6 +49,7 @@ class QueryController extends Controller
         ChildrenPerDiagnosisArea::class,
         ChildrenPerMaxDiagnosis::class,
         ChildrenPerYears::class,
+        ChildrenPerYearsByService::class,
         ChildrenPerServiceByMonths::class,
         ChildrenPerEndReason::class,
         ChildrenPerSourceChannel::class,

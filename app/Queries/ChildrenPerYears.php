@@ -15,9 +15,6 @@ class ChildrenPerYears extends QueryObject
     public function results()
     {
         return Child::with('services')
-            ->whereHas('services', function ($query) {
-                return $query->whereYear('first_appearance', '<=', config('bs.year'));
-            })
             ->get()
             ->flatMap(function ($child) {
                 return [

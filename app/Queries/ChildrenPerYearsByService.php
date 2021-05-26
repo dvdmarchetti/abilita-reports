@@ -46,6 +46,6 @@ class ChildrenPerYearsByService extends QueryObject
      */
     static public function question()
     {
-        return 'Quanti bambini per quanti anni hanno frequentato il servizio nel '. config('bs.year') .'?';
+        return 'Quanti bambini per quanti anni sono in carico a L’abilità? Divisi per servizio.';
     }
 }

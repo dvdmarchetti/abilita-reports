@@ -6,6 +6,7 @@ use App\Child;
 use App\Family;
 use App\Queries\ChildrenActive;
 use App\Queries\ChildrenPerAgeRange;
+use App\Queries\ChildrenPerAgeRangePerService;
 use App\Queries\ChildrenPerDiagnosisArea;
 use App\Queries\ChildrenPerEndReason;
 use App\Queries\ChildrenPerGender;
@@ -43,6 +44,7 @@ class QueryController extends Controller
         ChildrenPerService::class,
         ChildrenPerGender::class,
         ChildrenPerAgeRange::class,
+        ChildrenPerAgeRangePerService::class,
         ChildrenPerNationalityItalianOrOther::class,
         ChildrenPerNationality::class,
         ChildrenPerHomeCity::class,

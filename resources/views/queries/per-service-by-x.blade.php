@@ -1,7 +1,7 @@
 <table class="font-mono table-fixed">
   <thead>
     <tr>
-      <th>Servizio/Anni</th>
+      <th>Servizio/{{$column_name}}</th>
       @for ($i = 1; $i <= $column_count; $i++)
         <th class="p-2 text-right">{{ $i }}</th>
       @endfor

@@ -62,7 +62,7 @@ class ServicesImport extends CommonImport
 
             'anno_inizio_presa_in_carico_dal_servizio' => 'required|date',
             'anno_fine_presa_in_carico_dal_servizio' => 'nullable|present|date',
-            'motivo_fine_della_presa_in_carico' => 'nullable|in:DIMISSIONE,MOTIVI ECONOMICI,ALTRI MOTIVI,TRASFERIMENTO,VOLONTARIA',
+            'motivo_fine_della_presa_in_carico' => 'nullable|in:DIMISSIONE,MOTIVI ECONOMICI,ALTRI MOTIVI,PROGETTO TEMPORANEO,TRASFERIMENTO,VOLONTARIA',
 
             'data_inizio_frequenza_servizio_iscrizione_annuale' => 'required|date|before:today',
             'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',

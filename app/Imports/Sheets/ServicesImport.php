@@ -66,7 +66,7 @@ class ServicesImport extends CommonImport
 
             'data_inizio_frequenza_servizio_iscrizione_annuale' => 'required|date|before:today',
             'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',
-            'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
+            'mesi_frequenza_servizio_nellanno_solare_precedente_calcolo_automatico' => 'required|integer|min:0|max:12',
             'fonte_invio' => 'required|string|in:ATS,SERVIZI SOCIALI,SPONTANEA,UONPIA,CASE MANAGER,SCUOLA,SERVIZIO INTERNO ABILITÀ,ALTRO',
         ];
     }
@@ -121,7 +121,7 @@ class ServicesImport extends CommonImport
             'end_reason' => $row['motivo_fine_della_presa_in_carico'],
             'from' => $row['data_inizio_frequenza_servizio_iscrizione_annuale'],
             'to' => $row['data_fine_frequenza_servizio_dimissione_annuale'],
-            'attendance_months' => $row['mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano'],
+            'attendance_months' => $row['mesi_frequenza_servizio_nellanno_solare_precedente_calcolo_automatico'],
             'source' => $row['fonte_invio'],
         ]);
     }

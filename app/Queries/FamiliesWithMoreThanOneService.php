@@ -29,6 +29,6 @@ class FamiliesWithMoreThanOneService extends QueryObject
      */
     static public function question()
     {
-        return 'Quante famiglie usufruiscono di almeno servizio in area famiglia?';
+        return 'Quante famiglie usufruiscono di almeno un servizio in area famiglia?';
     }
 }

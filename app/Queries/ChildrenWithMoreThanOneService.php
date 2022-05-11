@@ -29,6 +29,6 @@ class ChildrenWithMoreThanOneService extends QueryObject
      */
     static public function question()
     {
-        return 'Quanti bambini usufruiscono di almeno servizio?';
+        return 'Quanti bambini usufruiscono di almeno un servizio?';
     }
 }

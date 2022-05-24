@@ -178,7 +178,7 @@ return [
         'available'             => 'disponibile',
         'size'                  => 'dimensione',
 
-        'mesi_frequenza_servizio_nellanno_solare_precedente_calcolo_automatico' => 'mesi frequenza servizio nell\'anno solare precedente',
+        'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'mesi frequenza servizio nell\'anno solare precedente',
         'nazionalita' => 'nazionalità',
         'rif_id_famiglia' => 'riferimento id famiglia',
     ],

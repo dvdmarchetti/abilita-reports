@@ -90,7 +90,7 @@ class FamilyServicesImport extends CommonImport
 
             'data_inizio_frequenza_servizio_iscrizione_annuale' => 'required|date|before:today',
             'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',
-            'mesi_frequenza_servizio_nellanno_solare_precedente_calcolo_automatico' => 'required|integer|min:0|max:12',
+            'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
 
             'grado_parentela' => 'sometimes|required|string|in:BAMBINO,Genitore,Fratello,Nonno,Adulto NO B,n.a.,VERIFICARE',
             'attivita'   => array_merge($baseActivityRules, [ 'required', 'different:attivita_2,attivita_3,attivita_4' ]),
@@ -140,7 +140,7 @@ class FamilyServicesImport extends CommonImport
             'end_of_charge' => $row['anno_fine_presa_in_carico_dal_servizio'],
             'from' => $row['data_inizio_frequenza_servizio_iscrizione_annuale'],
             'to' => $row['data_fine_frequenza_servizio_dimissione_annuale'],
-            'attendance_months' => $row['mesi_frequenza_servizio_nellanno_solare_precedente_calcolo_automatico'],
+            'attendance_months' => $row['mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano'],
 
             'relationship_degree' => $row['grado_parentela'] ?? null,
             'activity_1' => $row['attivita'] ?? null,

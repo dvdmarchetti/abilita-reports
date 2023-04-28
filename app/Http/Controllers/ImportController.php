@@ -24,20 +24,25 @@ class ImportController extends Controller
      */
     public function run()
     {
+        Log::info('Import begin');
+
         // DB::transaction(function () {
-            Artisan::call('migrate:fresh --force -q');
+        Log::debug('Cleaning up old data...');
+        Artisan::call('migrate:fresh --force -q');
 
-            $this->processFolder('input/children', function ($service, $file) {
-                (new ChildWorksheetImport)->for($service)->import($file);
-            });
+        $this->processFolder('input/children', function ($service, $file) {
+            (new ChildWorksheetImport)->for($service)->import($file);
+        });
 
-            $this->processFolder('input/families', function ($service, $file) {
-                (new FamilyWorksheetImport)->for($service)->import($file);
-            });
+        $this->processFolder('input/families', function ($service, $file) {
+            (new FamilyWorksheetImport)->for($service)->import($file);
+        });
 
-            $this->removeExtraData();
+        Log::debug('Removing extra data...');
+        $this->removeExtraData();
         // });
 
+        Log::info('Import complete');
         return redirect()->back();
     }
 
@@ -51,6 +56,8 @@ class ImportController extends Controller
      */
     protected function processFolder($path, $callback)
     {
+        Log::info('Importing folder.', ['folder' => $path]);
+
         $files = Storage::files($path);
 
         foreach ($files as $file) {
@@ -65,6 +72,10 @@ class ImportController extends Controller
 
     protected function removeExtraData()
     {
+        $orphanChildren = Child::doesntHave('services')->delete();
+        $orphanFamilies = Family::doesntHave('services')->doesntHave('children')->delete();
+        Log::debug('Extra data before removal.', ['children' => $orphanChildren, 'families' => $orphanFamilies]);
+
         $relations = collect([ChildService::query(), FamilyService::query()]);
 
         $relations->each(function ($relation) {
@@ -81,6 +92,10 @@ class ImportController extends Controller
 
         Child::doesntHave('services')->delete();
         Family::doesntHave('services')->doesntHave('children')->delete();
+
+        $orphanChildren = Child::doesntHave('services')->delete();
+        $orphanFamilies = Family::doesntHave('services')->doesntHave('children')->delete();
+        Log::debug('Extra data after removal.', ['children' => $orphanChildren, 'families' => $orphanFamilies]);
     }
 
     /**

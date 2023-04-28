@@ -21,7 +21,7 @@ abstract class ExcelWorksheetImport implements WithMultipleSheets
      * Set the current service that is importing the child
      *
      * @param [type] $service
-     * @return void
+     * @return self
      */
     public function for($service)
     {

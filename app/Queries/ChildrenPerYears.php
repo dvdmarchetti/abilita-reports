@@ -4,6 +4,7 @@ namespace App\Queries;
 
 use App\Child;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ChildrenPerYears extends QueryObject
 {
@@ -17,6 +18,8 @@ class ChildrenPerYears extends QueryObject
         return Child::with('services')
             ->get()
             ->flatMap(function ($child) {
+                Log::debug('Extracting details for children', ['child-id' => $child->id, 'services' => $child->services->count()]);
+
                 return [
                     $child->id => $this->diffInYears($child->services->first()->pivot),
                 ];

@@ -2,8 +2,11 @@
 
 namespace App\Queries;
 
+use Illuminate\Support\Facades\Log;
+
 abstract class QueryObject
 {
+    static protected $errorTemplate = 'queries.error';
     static protected $template = null;
 
     /**
@@ -20,7 +23,16 @@ abstract class QueryObject
      */
     public function view()
     {
-        $results = $this->results();
+        Log::debug('Extracting results for query object: ' . static::class);
+
+        try {
+            $results = $this->results();
+        } catch (\Exception $e) {
+            Log::error('Exception while extracting result set.');
+            report($e);
+            return view(static::$errorTemplate);
+        }
+
 
         return view(static::$template ?? 'queries.plain', compact('results'));
     }

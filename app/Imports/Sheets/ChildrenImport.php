@@ -38,7 +38,7 @@ class ChildrenImport extends CommonImport
     {
         return [
             'id_bambino' => ['required'],
-            'sesso' => ['in:M,F'],
+            'sesso' => ['required', 'in:M,F'],
             'data_di_nascita' => ['required', 'date'],
 
             'luogo_di_nascita_citta' => ['required', 'string'],
@@ -46,13 +46,14 @@ class ChildrenImport extends CommonImport
             'nazionalita' => ['required'],
 
             'residenza_citta' => ['bail', 'same_insensitive:area_metropolitana'],
-            'residenza_prov' => ['string', 'size:2'],
+            'residenza_prov' => ['required', 'string', 'size:2'],
             'residenza_cap' => ['integer', 'min:10000', 'max:99999'],
             'municipio_milano' => ['nullable', function ($attribute, $value, $fail) {
                 if ($value !== 'NO' && (!is_numeric($value) || ((int) $value) >= 10 || ((int) $value < 0))) {
                     $fail("The {$attribute} field must either be an integer number or 'NO' value.");
                 }
             }],
+            'area_metropolitana' => ['required'],
         ];
     }
 

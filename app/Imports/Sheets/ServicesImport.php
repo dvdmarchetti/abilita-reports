@@ -50,24 +50,24 @@ class ServicesImport extends CommonImport
     public function rules(): array
     {
         return [
-            'id_bambino' => 'exists:children,id',
-            'rif_id_famiglia' => 'exists:families,id',
-            'sesso' => 'in:M,F',
-            'data_di_nascita' => 'date',
+            'id_bambino' => ['required', 'exists:children,id'],
+            'rif_id_famiglia' => ['required', 'exists:families,id'],
+            'sesso' => ['required', 'in:M,F'],
+            'data_di_nascita' => ['required', 'date'],
 
-            'area_diagnosi' => 'required|in:DISABILITÀ INTELLETTIVA,DISABILITÀ NEUROMOTORIA,DISTURBO SPETTRO AUTISTICO,SINDROMI GENETICHE,ALTRE PATOLOGIE',
-            'diagnosi_1' => 'required|string',
-            'diagnosi_2' => 'nullable|string',
-            'diagnosi_3' => 'nullable|string',
+            'area_diagnosi' => ['required', 'in:DISABILITÀ INTELLETTIVA,DISABILITÀ NEUROMOTORIA,DISTURBO SPETTRO AUTISTICO,SINDROMI GENETICHE,ALTRE PATOLOGIE'],
+            'diagnosi_1' => ['required', 'string'],
+            'diagnosi_2' => ['nullable', 'string'],
+            'diagnosi_3' => ['nullable', 'string'],
 
-            'anno_inizio_presa_in_carico_dal_servizio' => 'required|date',
-            'anno_fine_presa_in_carico_dal_servizio' => 'nullable|present|date',
-            'motivo_fine_della_presa_in_carico' => 'nullable|in:DIMISSIONE,MOTIVI ECONOMICI,ALTRI MOTIVI,PROGETTO TEMPORANEO,TRASFERIMENTO,VOLONTARIA',
+            'anno_inizio_presa_in_carico_dal_servizio' => ['required', 'date'],
+            'anno_fine_presa_in_carico_dal_servizio' => ['nullable', 'present', 'date'],
+            'motivo_fine_della_presa_in_carico' => ['nullable', 'in:DIMISSIONE,MOTIVI ECONOMICI,ALTRI MOTIVI,PROGETTO TEMPORANEO,TRASFERIMENTO,VOLONTARIA'],
 
-            'data_inizio_frequenza_servizio_iscrizione_annuale' => 'required|date|before:today',
-            'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',
-            'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
-            'fonte_invio' => 'required|string|in:ATS,SERVIZI SOCIALI,SPONTANEA,UONPIA,CASE MANAGER,SCUOLA,SERVIZIO INTERNO ABILITÀ,ALTRO',
+            'data_inizio_frequenza_servizio_iscrizione_annuale' => ['required', 'date', 'before:today'],
+            'data_fine_frequenza_servizio_dimissione_annuale' => ['nullable', 'date', 'before:today'],
+            'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => ['required', 'integer', 'min:0', 'max:12'],
+            'fonte_invio' => ['required', 'string', 'in:ATS,SERVIZI SOCIALI,SPONTANEA,UONPIA,CASE MANAGER,SCUOLA,SERVIZIO INTERNO ABILITÀ,ALTRO'],
         ];
     }
 

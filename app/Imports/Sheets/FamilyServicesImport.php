@@ -83,14 +83,14 @@ class FamilyServicesImport extends CommonImport
         ];
 
         return [
-            'rif_id_famiglia' => 'required',
+            'rif_id_famiglia' => ['required'],
 
-            'anno_inizio_presa_in_carico_dal_servizio' => 'required|date',
-            'anno_fine_presa_in_carico_dal_servizio' => 'nullable|present|date',
+            'anno_inizio_presa_in_carico_dal_servizio' => ['required', 'date'],
+            'anno_fine_presa_in_carico_dal_servizio' => ['nullable', 'present', 'date'],
 
-            'data_inizio_frequenza_servizio_iscrizione_annuale' => 'required|date|before:today',
-            'data_fine_frequenza_servizio_dimissione_annuale' => 'nullable|date|before:today',
-            'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => 'required|integer|min:0|max:12',
+            'data_inizio_frequenza_servizio_iscrizione_annuale' => ['required', 'date', 'before:today'],
+            'data_fine_frequenza_servizio_dimissione_annuale' => ['nullable', 'date', 'before:today'],
+            'mesi_frequenza_servizio_nellanno_solare_precedente_x_bilancio_sociale_inserire_a_mano' => ['required', 'integer', 'min:0', 'max:12'],
 
             'grado_parentela' => 'sometimes|required|string|in:BAMBINO,Genitore,Fratello,Nonno,Adulto NO B,n.a.,VERIFICARE',
             'attivita'   => array_merge($baseActivityRules, [ 'required', 'different:attivita_2,attivita_3,attivita_4' ]),

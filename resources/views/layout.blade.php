@@ -19,7 +19,10 @@
     </div>
 
     <div class="relative bg-blue-400 md:pt-8 pb-24 pt-8">
-      <h2 class="block pb-8 text-white text-center text-3xl font-semibold">Bilancio Sociale {{ config('bs.year') + 1 }}</h2>
+      <h2 class="flex items-center justify-center pb-8 text-white text-center text-3xl font-semibold">
+        Bilancio Sociale {{ config('bs.year') + 1 }}
+        <span class="bg-pink-200 text-pink-700 text-xs mx-2 px-2 py-1 rounded-full leading-4 inline-block">v{{ config('bs.version') }}</span>
+      </h2>
       <div class="px-4 md:px-10 mx-auto w-full">
         <div>
           @yield('cards')
@@ -27,8 +30,12 @@
       </div>
     </div>
 
-    <div class="px-4 md:px-10 mx-auto w-full -m-24">
+    <div class="px-4 md:px-10 mx-auto w-full -mt-24">
       @yield('content')
+    </div>
+
+    <div class="px-4 md:px-10 mx-auto w-full text-center">
+      <span class="text-sm">v{{ config('bs.version') }}</span>
     </div>
 
     @stack('custom-scripts')

@@ -24,6 +24,9 @@ class ImportController extends Controller
      */
     public function run()
     {
+        $version = config('bs.version');
+        Log::info("Running v" . $version);
+
         Log::info('Import begin');
 
         // DB::transaction(function () {

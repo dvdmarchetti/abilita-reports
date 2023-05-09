@@ -24,6 +24,8 @@ class ImportController extends Controller
      */
     public function run()
     {
+        Log::stack(['single', 'import'])->info("---------------------");
+
         $version = config('bs.version');
         Log::info("Running v" . $version);
 
@@ -75,9 +77,11 @@ class ImportController extends Controller
 
     protected function removeExtraData()
     {
-        $orphanChildren = Child::doesntHave('services')->delete();
-        $orphanFamilies = Family::doesntHave('services')->doesntHave('children')->delete();
-        Log::debug('Extra data before removal.', ['children' => $orphanChildren, 'families' => $orphanFamilies]);
+        $orphanChildren = Child::doesntHave('services')->get('id');
+        $orphanFamilies = Family::doesntHave('services')->doesntHave('children')->get('id');
+        Log::debug('Extra data before removal:', ['children_count' => $orphanChildren->count(), 'families_count' => $orphanFamilies->count()]);
+        Log::debug('Orphan childrens:', $orphanChildren->toArray());
+        Log::debug('Orphan families:', $orphanFamilies->toArray());
 
         $relations = collect([ChildService::query(), FamilyService::query()]);
 
@@ -96,9 +100,9 @@ class ImportController extends Controller
         Child::doesntHave('services')->delete();
         Family::doesntHave('services')->doesntHave('children')->delete();
 
-        $orphanChildren = Child::doesntHave('services')->delete();
-        $orphanFamilies = Family::doesntHave('services')->doesntHave('children')->delete();
-        Log::debug('Extra data after removal.', ['children' => $orphanChildren, 'families' => $orphanFamilies]);
+        $orphanChildren = Child::doesntHave('services')->count();
+        $orphanFamilies = Family::doesntHave('services')->doesntHave('children')->count();
+        Log::debug('Extra data after removal:', ['children' => $orphanChildren, 'families' => $orphanFamilies]);
     }
 
     /**

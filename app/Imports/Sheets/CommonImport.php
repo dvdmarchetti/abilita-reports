@@ -148,6 +148,8 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
             'level' => LogLevel::ERROR,
             'child' => $validator->attributes()['id_bambino'],
             'family' => $validator->attributes()['family_id'] ?? null,
+            'spreadsheet' => $this->name,
+            'service' => (string) $this->spreadsheet->getService()->id,
             'errors' => $validator->errors()->all(),
         ]);
     }
@@ -164,10 +166,6 @@ abstract class CommonImport implements ToCollection, WithMapping, WithHeadingRow
     {
         $level ??= LogLevel::ERROR;
         $message ??= 'Validation failed.';
-        $context += [
-            'spreadsheet' => $this->name,
-            'service' => (string) $this->spreadsheet->getService()->id
-        ];
 
         LogMessage::create($context);
         Log::channel('import')->error($message, $context);

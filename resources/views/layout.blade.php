@@ -35,7 +35,7 @@
     </div>
 
     <div class="px-4 md:px-10 mx-auto w-full text-center">
-      <span class="text-sm">v{{ config('bs.version') }}</span>
+      <span class="text-sm">Version {{ config('bs.version') }}</span>
     </div>
 
     @stack('custom-scripts')
